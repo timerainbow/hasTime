@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>echarts</title>
+	<style type="text/css">
+		#echart-container{
+			width: 800px;
+			height: 400px;
+			border:1px solid #eee;
+		}
+	</style>
+</head>
+<body>
+<div id="echart-container"></div>
+<script type="text/javascript" src="../jquery.js"></script>
+<script type="text/javascript" src="./echarts.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+        $.get('./map.geojson', function (henanJson) {
+            echarts.registerMap('南方五省', henanJson);
+            var chart = echarts.init(document.getElementById('echart-container'));
+            var option = {
+                series:[
+                    {
+                        name:'1',
+                        type:'map',
+                        map:'南方五省',
+                        zoom:0.8,
+                        label: {
+                            normal: {
+                                show: true
+                            },
+                            emphasis: {
+                                show: true
+                            }
+                        },
+                        mapLocation:{
+                            y:60
+                        },
+                        itemSytle:{
+                            emphasis:{label:{show:false}}
+                        },
+                        data:[
+                        ]
+                    }
+                ],
+
+            };
+            chart.setOption(option);
+            chart.resize()
+        })
+
+    })
+</script>
+</body>
+</html>

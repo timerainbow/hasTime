@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>封装echart</title>
+	<script type="text/javascript" src="./echarts/echarts.min.js"></script>
+	<style type="text/css">
+		.charts{
+			width: 600px;
+			height: 400px;
+			display: inline-block;
+			border:1px solid #eee;
+		}
+	</style>
+</head>
+<body>
+	<div class="charts" id="chart-1"></div>
+<script type="text/javascript">
+	/*
+	* id:echart绑定的html标签的ID
+	* chartTypee:echart的类型
+	* yAxisName:y轴标题
+	* ajaxConfig:ajax配置
+	*/
+	function barLinePie(id,chartType,yAxisName,ajaxConfig){
+		var myChart = echarts.init(document.getElementById(id));	
+		var option = null;	
+		$.ajax({
+			url:ajaxConfig.url,
+			data: ajaxConfig.postData?ajaxConfig.postData:'',
+			dataType: ajaxConfig.dataType?ajaxConfig.dataType:'json',
+			type: ajaxConfig.postType?ajaxConfig.postType:'POST',
+			beforeSend:function(){
+				mychart.loading();
+			},
+			complete:function(){
+				mychart.closeLoading();
+			},
+			success: function(data) {
+				option = {
+				    xAxis: {
+				        type: 'category',
+				        data: data.xAxisText?data.xAxisText:['', '', '']
+				    },
+				    yAxis: {
+				        type: 'value',
+				        name: yAxisName?yAxisName:''
+				    },
+				    series: [{
+				        data: data.data?data.data:[820, 932, 901],
+				        type: chartType
+				    }]
+				};
+				mychart.setOption(option);
+			},
+		});
+	}
+</script>
+</body>
+</html>

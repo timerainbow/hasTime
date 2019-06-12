@@ -1,0 +1,482 @@
+*{
+	box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+.containerContent{
+    width: 900px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+}
+.inputZone {
+    display: inline-block;
+    width: 30%;
+}
+.presentUser{
+    width: 60%;
+    display: inline-block;
+    color: #333;
+}
+.presentUser .userName{
+    color: #666;
+}
+select {
+    width: 210px;
+    height: 32px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    border: solid 1px #dddddd;
+    padding-left: 10px;
+    outline: none;
+}
+.content,.content2{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.content .f_div{
+    width: 30%;
+}
+ .f_div{
+    float: left;
+}
+.content .right{
+    width: 68%;
+    margin-left: 2%;
+    border: 1px solid #B5CEE3;
+    border-radius: 8px;
+}
+.content .left{
+    border: 1px solid #B5CEE3;
+    border-radius: 8px;
+}
+.content .left .title{
+    text-align: center;
+    padding: 8px 0;
+    color: #666;
+    background-color: #EDF3F8;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+.content .left ul{
+    padding: 0;
+    margin: 0;
+}
+.content .left li{
+    list-style: none;
+    color: #333;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 30px;
+    border-bottom: 1px solid #eee;
+    position: relative;
+}
+.content .left li:after{
+    content: '';
+    display: block;
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    right: 10px;
+    top: 16px;
+    background-image: url(../images/leftArrow.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.content .left li:last-child{
+    border-bottom: none;
+}
+.content .left li:hover{
+    background-color: #eee;
+    cursor: pointer;
+}
+.btns-wrapper{
+    height: 37px;
+    line-height: 37px;
+    background-color: #eee;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+    padding: 0 10px;
+}
+.btns-wrapper:after{
+    content: '';
+    display: table;
+    clear: both;
+    height: 0;
+    visibility: hidden;
+}
+.btns-wrapper .pos_name{
+    color: #0099FF;
+}
+.btn{
+    background-color: #0099FF;
+    text-align: center;
+    line-height: 32px;
+    color: white;
+    cursor: pointer;
+    padding: 0 12px;
+    height: 30px;
+    border-radius: 8px;
+    display: inline-block;
+    /* float: right; */
+    margin-left: 10px;
+    margin-top: 4px;
+}
+.content2 .left .btn,.content .btn{
+	float:right;
+}
+.content2 .left .btn{
+	margin-top:-4px;
+}
+.btns-wrapper .text{
+    vertical-align: middle;
+}
+
+#cancle_authority{
+    background-color: #FC2044;
+}
+.btn:hover{
+    opacity: 0.6;
+}
+
+.search-input{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    width: 90%;
+    position: relative;
+}
+.search-input img{
+    position: absolute;
+    right: 10px;
+    width: 20px;
+    top: 8px;
+    cursor: pointer;
+}
+.search-input img:hover{
+    opacity: 0.6;
+}
+.search-input input{
+    width: 100%;
+    padding: 0px 10px;
+    outline: none;
+    border-radius: 6px;
+    border:1px solid #eee;
+    height: 34px;
+    line-height: 34px;
+    padding-right: 40px;
+}
+#refreshTree{
+    width: 24px;
+    position: absolute;
+    cursor: pointer;
+    top: 6px;
+    right: -36px;
+}
+
+#z-tree,#rolePage-tree-right,#rolePage-tree-left{
+    padding-left: 16px;
+}
+.ztree li span.button.noline_open{
+    background-image: url(../images/treeOpen.png);
+    background-position: 3px 10px;
+    background-size: contain;
+    background-size: 70%;
+}
+
+.ztree li span.button.noline_close{
+    background-image: url(../images/treeClose.png);
+    background-position: 5px 8px;
+    background-size: contain;
+    background-size: 40%;
+}
+#z-tree a.level0,#rolePage-tree-right a.level0,#rolePage-tree-left a.level0{
+    font-weight: bold;
+}
+#z-tree span,#rolePage-tree-right span,#rolePage-tree-left span{
+    font-size: 14px;
+    line-height: 26px;
+    height: 26px;
+    display: inline-block;
+}
+
+#z-tree a,#rolePage-tree-right a,#rolePage-tree-left a{
+    line-height: 26px;
+    height: 26px;
+    display: inline-block;
+}
+.content:after,.content2:after{
+    content: '';
+    display: table;
+    clear: both;
+    height: 0;
+    visibility: hidden;
+}
+
+.content2 .left,.content2 .right{
+    width: 43%;
+    border: 1px solid #B5CEE3;
+    border-radius: 8px;
+}
+.content2 .middle{
+    width: 14%;
+    text-align: center;
+}
+.content2 .title{
+    text-align: left;
+    padding: 12px 10px;
+    color: #666;
+    background-color: #EDF3F8;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    position: relative;
+}
+.content2 .search-input{
+    width: 40%;
+    position: absolute;
+    top: -4px;
+    right: 80px;
+}
+.content2 .search-input input{
+    padding-right: 10px;
+}
+.content2 .middle .btn{
+    position: absolute;
+    right: 10px;
+    top: 4px;
+}
+.tree-wrapper{
+    padding: 0 10px;
+}
+.content2 .middle .btn{
+    display: inline-block;
+    position: relative;
+    right: 6%;
+    top: 100px;
+}
+.fullHeight{
+    overflow-y: auto;
+}
+
+.f_div_wrapper:after{
+	content:'';
+	display:table;
+	clear:both;
+	height:0;
+	visibility:hidden;
+}
+.btns-bottom-wrapper{
+	margin-top:20px;
+	text-align:center;
+}
+.btns-bottom-wrapper .btn{
+	display:inline-block;
+}
+@keyframes myAnimation{
+	from {opacity: 0;}
+	to {opacity: 1;}
+}
+.overflowTips{
+	width: 250px;
+	color: #333;
+	border:1px solid #00a8ff;
+	background-color: #b3e0f7;
+	padding: 2px 4px;
+	font-size: 14px;
+	line-height: 20px;
+	word-wrap:break-word;
+	border-radius: 4px;
+	position: fixed;
+	animation: myAnimation 2s;
+	-moz-animation: myAnimation 2s;	/* Firefox */
+	-webkit-animation: myAnimation 2s;	/* Safari 和 Chrome */
+	-o-animation: myAnimation 2s;
+}
+.hannya-overflow-text{
+	width: 247px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	display: block;
+	line-height: 30px;
+	/*margin-top: 35px;*/
+}
+.hannya-nodata{
+	border-bottom: 1px solid #eee;
+	border-left: 1px solid #eee;
+	border-right: 1px solid #eee;
+	border-bottom-left-radius: 8px;
+	border-bottom-right-radius: 8px;
+	text-align: center;
+	color: #bbb;
+}
+/*end*/
+body,html{
+	overflow-y:auto;
+}
+.containerContent {
+    width: 98%;
+}
+.content2 .middle{
+	width:10%;
+}
+.content2 .left, .content2 .right{
+	width:45%;
+}
+.f_div_wrapper .left{
+	overflow-y:auto;
+}
+.content2 .right .btn{
+	float:right;
+	margin-top:-4px;
+}
+.content2 .left, .content2 .right{
+	
+}
+#refreshLeftTree,#refreshRightTree{
+	right:-32px;
+}
+.content2 .search-input{
+	right:46px;
+}
+
+
+
+
+
+.table-wrapper{
+    min-height: 300px;
+}
+
+/*-----------------------------------------------------------------------*/
+.movableTable-table{
+    white-space: nowrap;
+    font-size: 0;
+    overflow: auto;
+}
+.movableTable-th{
+    background-color: #33B9FF;
+    color: white;
+    text-align: center;
+}
+.movableTable-th,.movableTable-td{
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 14px;
+    height: 36px;
+    line-height: 36px;
+    border-bottom:1px solid #eee;
+    border-right:1px solid #eee;
+    text-align: center;
+    padding: 0 6px;
+}
+.movableTable-td{
+    background-color: white;
+}
+.movableTable-th:last-child,.movableTable-td:last-child{
+    border-right: none;
+}
+.movableTable-wrapper{
+    width: 98%;
+    overflow: hidden;
+    height: 300px;
+    border:1px solid #eee;
+    border-radius: 8px;
+    margin: 4px auto;
+    position: relative;
+}
+.movableTable-header,.movableTable-body{
+    min-width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*濞撳懏顨焛e鏉堟挸鍙嗗鍡楀礁娓氀呮畱閸欏褰�*/
+::-ms-clear,::-ms-reveal{display: none;}
+
+/*--------------------------------- 鐠佸墽鐤嗗姘З閺夛紕娈戦弽宄扮础 ---------------------------------*/
+::-webkit-scrollbar {
+	width: 12px;
+	height: 12px;
+	border:1px solid #ebebeb;
+}
+::-webkit-scrollbar:horizontal {
+	height: 18px;
+}
+/* 濠婃艾濮╁Σ锟� */
+::-webkit-scrollbar-track {
+	/*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;*/
+	background-color: #fff;
+	border:1px solid #ebebeb
+}
+/* 濠婃艾濮╅弶鈩冪拨閸э拷 */
+::-webkit-scrollbar-thumb {
+	/*border-radius: 10px;*/
+	/*background: #bbb;*/
+	background: #ebebeb;
+	border:1px solid #ebebeb;
+	/*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);*/
+}
+/*妞ょ敻娼版稉宥堫潶闁鑵戦弮鑸电泊閸斻劍娼惃鍕壉瀵拷*/
+::-webkit-scrollbar-thumb:window-inactive {
+	background: #ebebeb;
+}
+/*鐎规矮绠熼張锟芥稉濠冩煙閸滃本娓舵稉瀣煙閻ㄥ嫭瀵滈柦锟�*/
+/*::-webkit-scrollbar-button{
+     background-image: url(../images/scroll-right.png);
+     background-repeat: no-repeat;
+     background-size: cover;
+}*/
+::-webkit-scrollbar-button:horizontal:single-button:start { 
+    background: url("../images/scroll-left.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+::-webkit-scrollbar-button:horizontal:single-button:end { 
+    background: url("../images/scroll-right.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+::-webkit-scrollbar-button:vertical:single-button:start { 
+    background: url("../images/scroll-top.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+::-webkit-scrollbar-button:vertical:single-button:end { 
+    background: url("../images/scroll-bottom.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+/*--------------IE濠婃艾濮╅弶锟�-----------------*/
+html,body{
+	/*娑撳顫楃粻顓炪仈閻ㄥ嫰顤侀懝锟�*/
+    /*scrollbar-arrow-color: #f00;*/
+    /*濠婃艾濮╅弶鈩冪拨閸ф瀵滈柦顔炬畱妫版粏澹�*/
+    scrollbar-face-color: #fff;
+    /*濠婃艾濮╅弶鈩冩殻娴ｆ捇顤侀懝锟�*/
+    scrollbar-highlight-color: #ebebeb;
+    /*濠婃艾濮╅弶锟犳Ь瑜帮拷*/
+    scrollbar-shadow-color: #ebebeb;
+    /*濠婃艾濮╅弶陇寤洪柆鎾活杹閼癸拷*/
+    scrollbar-track-color: #ebebeb;
+
+}
+

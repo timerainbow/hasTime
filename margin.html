@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>margin</title>
+	<style type="text/css">
+		.wrapper{
+			/*border:1px solid green;
+			overflow: hidden;*/
+			background-color: #eee;
+		}
+		.son{
+			margin: 100px 0;
+			border:1px solid red;
+			/*overflow: hidden;*/
+			background-color: #bbb;
+		}
+		/*.son2{
+			display: inline-block;
+		}*/
+
+
+		.button-list{
+			padding: 10px;
+			overflow: hidden;
+		}
+		.button-list .button-wrapper{
+			float: left;
+			width: 33.33%;
+		}
+		.button-list .button-wrapper .button{
+			margin: 10px;
+			text-align: center;
+			border:2px solid #ccc;
+		}
+		.button-list:after{
+			border-color: red
+		}
+	</style>
+</head>
+<body>
+<div class="wrapper">
+	father
+	<div class="son son1">son1</div>
+	<div class="son son2">son3</div>
+	father
+</div>
+
+<div class="button-list">
+	<div class="button-wrapper">
+		<div class="button">北京</div>
+	</div>
+</div>
+</body>
+</html>

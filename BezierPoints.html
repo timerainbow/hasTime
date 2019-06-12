@@ -1,0 +1,278 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>两条线段的平滑过渡</title>
+	<script type="text/javascript" src="./jquery.js"></script>
+	<style type="text/css">
+		#main{
+			border:1px solid red;
+		}
+		#main1{
+			border:1px solid red;
+		}
+	</style>
+</head>
+<body>
+<div id="main" style="width: 600px;height: 400px"></div>
+<div id="main1" style="width: 600px;height: 400px"></div>
+<script type="text/javascript" src="./echarts/echarts.min.js"></script>
+<script type="text/javascript">
+	var origin = getOrigin({x:856,y:30},{x:800,y:875},{x:500,y:1000},40);
+	var chartList = getRound(origin,100,40);
+	console.log(chartList);
+
+	var myChart = echarts.init(document.getElementById("main"));
+
+	var	option = {
+	    grid: {
+	        top: 50,
+	        left: 10,
+	        right: 10,
+	        bottom: 10
+	    },
+	    xAxis: {
+	        splitLine: {
+	            show: false
+	        },
+	        axisLine: {
+	            show: false
+	        },
+	        axisTick: {
+	            show: false
+	        },
+	        axisLabel: {
+	            show: false
+	        },
+	        max: 1000,
+	        min: 0
+	    },
+	    yAxis: {
+	        silent: true,
+	        splitLine: {
+	            show: false
+	        },
+	        axisLine: {
+	            show: false
+	        },
+	        axisTick: {
+	            show: false
+	        },
+	        axisLabel: {
+	            show: false
+	        },
+	        max: 1000,
+	        min: 0
+	    },
+	    series: [{
+	        coordinateSystem: 'cartesian2d',
+	        type: 'lines',
+	        zlevel: 1,
+	        polyline:true,
+	        smooth:true,
+	        effect: {
+	            show: true,
+	            constantSpeed: 100,
+	            trailLength: 0.5,
+	            symbolSize: 4,
+	            symbol: 'diamond',
+	            loop: true
+	        },
+	        symbol:'circle',
+	        symbolSize:20,
+	        lineStyle: {
+            	normal: {
+	                color: '#0099FF',
+	                opacity: 0.12,
+	                curveness: -0.2,
+	                width:1,
+	                smooth:true,
+	            }
+	        },
+	        data: [{
+	            coords: [
+	            	[856,30],
+	            	[800,875],
+	            	[500,1000]
+	            ],
+	            // coords:chartList
+	        }]
+	    }]
+	};
+
+	myChart.setOption(option);
+
+	function getOrigin(p1,p2,p0,r){
+		var k1 = (p1.y - p0.y) / (p1.x - p0.x);
+		var k2 = (p2.y - p0.y) / (p2.x - p0.x);
+		var tana = Math.atan(k1) / (Math.PI / 180);
+		var tanb = Math.atan(k2) / (Math.PI / 180);
+		if(tana<0){
+			tana = 180 + tana
+		}
+		if(tanb<0){
+			tanb = 180 + tanb
+		}
+		var tano = 0;
+		if(tana > tanb){
+			tano = tana - tanb;
+		}else{
+			tano = tanb - tana;
+		}
+		var originAngle = 0;
+		if(tana > tanb){
+			originAngle = (tano/2 + tanb)*(Math.PI/180);
+		}else{
+			originAngle = (tano/2 + tana)*(Math.PI/180);
+		}	
+		var Origin = {x:0,y:0};
+		Origin.x = r*Math.cos(originAngle)/Math.sin((tano/2)*(Math.PI/180)) + p0.x;
+		Origin.y = r*Math.sin(originAngle)/Math.sin((tano/2)*(Math.PI/180)) + p0.y;
+		return Origin;
+	}
+
+	function getRound(origin,number,r){
+		console.log(origin)
+		var points = [];		
+		for(var i=0;i<number;i++){
+			var point = [];
+			point.push(origin.x+r*Math.cos(((360*i)/number)*(Math.PI/180)));
+			point.push(origin.y+r*Math.sin(((360*i)/number)*(Math.PI/180)));
+			points.push(point)
+		}
+		return points;
+	}
+
+
+
+	/*var poi = CreateBezierPoints([{x:856,y:30},{x:800,y:875},{x:500,y:1000}],1000);
+	var list = [];
+	var item = null;
+	for(var j=0;j<poi.length;j++){
+		item = [];
+		item.push(poi[j].x);
+		item.push(poi[j].y);
+		list.push(item);
+	}
+	console.log(list);
+	
+
+
+
+	//贝塞尔曲线路劲
+	function CreateBezierPoints(anchorpoints, pointsAmount){
+		var points = [];
+		for (var i=0;i<pointsAmount;i++) {
+			var point = MultiPointBezier(anchorpoints, i / pointsAmount);
+			points.push(point);
+		}
+		return points;
+	}
+
+	function MultiPointBezier(points, t){
+		var len = points.length;
+		var x = 0, y = 0;
+		var erxiangshi = function(start, end) {
+			var cs = 1, bcs = 1;
+			while (end > 0) {
+				cs *= start;
+				bcs *= end;
+				start--;
+				end--;
+			}
+			return (cs / bcs);
+		};
+		for (var i = 0; i < len; i++) {
+			var point = points[i];
+			x += point.x * Math.pow((1 - t), (len - 1 - i)) * Math.pow(t, i) * (erxiangshi(len - 1, i));
+			y += point.y * Math.pow((1 - t), (len - 1 - i)) * Math.pow(t, i) * (erxiangshi(len - 1, i));
+		}
+		return {
+			x: x,
+			y: y
+		};
+	}
+
+
+	var myChart2 = echarts.init(document.getElementById("main1"));
+
+	var	option = {
+	    grid: {
+	        top: 50,
+	        left: 10,
+	        right: 10,
+	        bottom: 10
+	    },
+	    xAxis: {
+	        splitLine: {
+	            show: false
+	        },
+	        axisLine: {
+	            show: false
+	        },
+	        axisTick: {
+	            show: false
+	        },
+	        axisLabel: {
+	            show: false
+	        },
+	        max: 1000,
+	        min: 0
+	    },
+	    yAxis: {
+	        silent: true,
+	        splitLine: {
+	            show: false
+	        },
+	        axisLine: {
+	            show: false
+	        },
+	        axisTick: {
+	            show: false
+	        },
+	        axisLabel: {
+	            show: false
+	        },
+	        max: 1000,
+	        min: 0
+	    },
+	    series: [{
+	        coordinateSystem: 'cartesian2d',
+	        type: 'lines',
+	        zlevel: 1,
+	        polyline:true,
+	        smooth:true,
+	        effect: {
+	            show: true,
+	            constantSpeed: 100,
+	            trailLength: 0.5,
+	            symbolSize: 4,
+	            symbol: 'diamond',
+	            loop: true
+	        },
+	        symbol:'circle',
+	        symbolSize:20,
+	        lineStyle: {
+            	normal: {
+	                color: '#0099FF',
+	                opacity: 0.12,
+	                curveness: -0.2,
+	                width:1,
+	                smooth:true,
+	            }
+	        },
+	        data: [{
+	            //coords: [
+	            //	[856,30],
+	            //	[800,875],
+	            //	[500,1000]
+	            //],
+	            coords:list
+	        }]
+	    }]
+	};
+
+	myChart2.setOption(option);*/
+</script>
+</body>
+</html>

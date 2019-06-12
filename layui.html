@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<button>click</button>
+<script type="text/javascript" src="./jquery.js"></script>
+<script type="text/javascript" src="./layui/layui.js"></script>
+<script type="text/javascript">
+	$('button').click(function(){
+		layui.use('layer', function(){
+		  var layer = layui.layer;			  
+		  layer.msg('hello');
+		});  
+	})
+</script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>echarts水晶球</title>
+	<link rel="stylesheet" type="text/css" href="liquidfill.css">
+	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript" src="./echarts/echarts.min.js"></script>
+	<script type="text/javascript" src="./echarts/echarts-liquidfill.min.js"></script>
+</head>
+<body>
+	<div class="liquidFillWrapper liquidFillWrapper1">
+		<div class="rings outerRing">
+			<div class="rings innerRing"></div>
+		</div>
+		<div id="liquidfill"></div>
+		<div class="amountLabel labels">总量12</div>
+		<div class="makeLabel labels">正常11</div>
+		<div class="amountLine lines"></div>
+		<div class="makeLine lines"></div>
+	</div>
+<script type="text/javascript">
+	initClockDial();
+	function initClockDial(){
+		var clockDial = '<ul class="clock-dial">'
+		for(var i=1;i<=60;i++){
+			clockDial += '<li class=dialIndex-'+i+'></li>'
+		}
+		clockDial += '</ul>'
+		$('.liquidFillWrapper .innerRing').append(clockDial);
+
+		var rotate = 0;
+		var left = 0;
+		var top = 0;
+		var innerWidth = $('.liquidFillWrapper .innerRing').width();
+		var roundR = innerWidth/2;
+
+		for(var i=0;i<60;i++){
+			rotate = 6*i;
+			top = roundR - Math.cos((rotate*Math.PI)/180)*roundR;
+			left = roundR + Math.sin((rotate*Math.PI)/180)*roundR;
+			$('.clock-dial li').eq(i).css({
+				'top':top+'px',
+				'left':left+'px',
+				'transform':'rotate('+rotate+'deg)'
+			})
+		}
+	}
+
+
+	var myChart = echarts.init(document.getElementById('liquidfill'));
+	var option = {
+		series: [{
+	        type: 'liquidFill',
+	        data: [0.6,0.55],
+	        color: ['#53E914','#00BA17'],
+	        outline: {
+	            show: false
+	        },
+	        backgroundStyle: {
+	            color: 'white'
+	        },
+	        label: ''
+	    }]
+	}
+	myChart.setOption(option);
+</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>flex</title>
+	<style type="text/css">
+		.parent{
+			width: 300px;
+			background-color: #5757;
+			border:1px solid yellow;
+			display: flex;
+			box-sizing: border-box;
+		}
+		.item{
+			/*flex: 1;*/
+			border:1px solid blue;
+			margin-right: -1px;
+			background-color: #888;
+			margin-bottom: -1px;
+			flex-basis: 300px;
+			overflow: hidden;
+			word-wrap: normal;
+			text-overflow: ellipsis;
+		}
+		/*.item-flex{
+			flex: 1;
+		}*/
+	</style>
+</head>
+<body>
+<div class="parent">
+	<div class="item">item111</div>
+	<div class="item">item111</div>
+	<div class="item item-flex">item111111111111</div>
+	<div class="item">item111</div>
+	<div class="item">item111</div>
+	<div class="item">item111</div>
+</div>
+</body>
+</html>
