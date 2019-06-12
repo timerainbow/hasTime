@@ -29,6 +29,30 @@ app.get('/addUser', function (req, res) {
 })
 
 
+app.get('/:id', function (req, res) {
+   // 首先我们读取已存在的用户
+   fs.readFile( __dirname + "/" + "users.json", 'utf8', function (err, data) {
+       data = JSON.parse( data );
+       var user = data["user" + req.params.id] 
+       console.log( user );
+       res.end( JSON.stringify(user));
+   });
+})
+
+var id = 2;
+app.get('/deleteUser', function (req, res) {
+
+   // First read existing users.
+   fs.readFile( __dirname + "/" + "users.json", 'utf8', function (err, data) {
+       data = JSON.parse( data );
+       delete data["user" + 2];
+       
+       console.log( data );
+       res.end( JSON.stringify(data));
+   });
+})
+
+
 var server = app.listen(3000, function () {
 
   var host = server.address().address
@@ -37,3 +61,4 @@ var server = app.listen(3000, function () {
   console.log("应用实例，访问地址为 http://%s:%s", host, port)
 
 })
+//https://www.runoob.com/nodejs/nodejs-restful-api.html
