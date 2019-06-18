@@ -1,4 +1,5 @@
 //https://www.cnblogs.com/w-s-l123/p/9418296.html
+//另：https://blog.csdn.net/m0_37828249/article/details/78531929
 var express = require('express');
 var app = express();
 var session = require('express-session');
@@ -20,6 +21,10 @@ app.use(session({
 	}
 }))
 
+app.get('/login',function(req,res){
+	res.sendFile(__dirname + '/login.html');
+})
+
 app.post('/login',function(req,res){
 	if(req.body.username == 'admin' && req.body.pwd == 'admin'){
 		req.session.username = req.body.username;
@@ -34,7 +39,7 @@ app.post('/login',function(req,res){
 
 app.get('/',function(req,res){
 	if(req.session.username){
-		req.render('home',{
+		res.render('home',{
 			username:req.session.username
 		})
 	}else{
