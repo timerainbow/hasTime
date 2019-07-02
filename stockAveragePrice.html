@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>均价计算</title>
+	<script type="text/javascript" src="jquery.js"></script>
+</head>
+<body>
+<div class="line">
+	<div class="inputs in">
+		<label>进价：</label>
+		<input type="text" name="">
+	</div>
+	
+	<div class="inputs amount">
+		<label>数量：</label>
+		<input type="text" name="">
+	</div>
+</div>
+
+<div class="line">
+	<div class="inputs in">
+		<label>进价：</label>
+		<input type="text" name="">
+	</div>
+	
+	<div class="inputs amount">
+		<label>数量：</label>
+		<input type="text" name="">
+	</div>
+</div>
+<button>计算</button>
+<div class="averagePrice"></div>
+<script type="text/javascript">
+	var stockAmount = 0;
+	var stockPrice = 0;
+	var averagePrice = 0;
+
+	function getStockMoney(){
+		var stockP = 0;
+		$('.line').each(function(index,item){
+			var price = parseFloat($(this).find('.in input').val());
+			var amount = parseFloat($(this).find('.amount input').val());
+			if(amount && price){
+				stockP += amount*price;
+			}		
+		})
+		return stockP;
+	}
+
+	function getStockAmount(){
+		var amount = 0;
+		$('.line').each(function(index,item){
+			var a = parseFloat($(this).find('.amount input').val());
+			if(a){
+				amount += a;
+			}		
+		})
+		return amount;
+	}
+
+	function getAverage(amount,money){
+		return  money / amount;
+	}
+
+	$("button").click(function(){
+		var amount = getStockAmount();
+		var price = getStockMoney();
+		$(".averagePrice").text(getAverage(amount,price));
+	})
+	//$(".averagePrice").text(averagePrice);
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

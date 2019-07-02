@@ -23,3 +23,6 @@ window.frames["iframe_ID"].document.getElementById("元素id");
  
 DOM元素访问
 获取到页面的window.document对象后，即可访问DOM元素
+
+获取顶层iframe
+window.top
