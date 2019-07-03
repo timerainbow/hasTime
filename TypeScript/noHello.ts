@@ -28,4 +28,42 @@ export class noHello{
 
 	test`hello,my name is ${myName},i'm ${getAge()} years old`
 	*/
+
+	//4.参数类型
+	/*
+	var myname:string = "hahaha"
+	myname = 13 //warning
+
+	var alias = "xx"
+	alias = 12 //warning
+
+	var alias:any ="enen"
+	alias = "oo" //ok
+
+	function test(name:string): void {
+		return "xx" // error
+	}
+
+	class Person{
+		name:string,
+		age:number
+	}
+
+	var h:Person = new Person();
+	h.name = "dff";
+	h.age = 24
+	*/
+
+	//5.默认参数
+	/*
+	var myname:string = "liang"
+
+	function test(a:string,b:string,c:string="liangh"){
+		
+	}
+
+	test('xx') //error
+	test('xx','yy') //ok
+	test('xx,'uu','oo') //ok
+	*/
 }
