@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<div id="main">
+	hello Mr.liang
+	<p>
+		welcome here!
+	</p>
+</div>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript">
+/*nodeType*///1.标签  2.属性  3.文本
+
+var contents = $("#main").contents();
+var text = contents.filter(function(){
+	return this.nodeType === 3
+	//console.log("nodeType:"+this.nodeType);
+}).text();
+console.log(text)
+</script>
+</body>
+</html>
