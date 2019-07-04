@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Generator(生产者，产生器)  yield(出产、产量、放弃)</title>
+	<meta charset="utf-8">
+</head>
+<body>
+<script type="text/javascript" src="../jquery.js"></script>
+<script type="text/javascript">
+	/*--------------------运行-停止-运行-------------------------*/
+	/*
+	**由于ES6Generators的到来，我们拥有了另外一种类型的函数，
+	**这种函数可以在执行的过程中暂停一次或多次，在将来的某个时间继续执行，
+	**并且允许在Generator函数暂停的过程中运行其他代码。
+	**
+	**在Generator函数体内部，你可以使用yield关键字在函数内部暂停函数的执行，
+	**在Generator函数外部是无法暂停一个Generator函数执行的；每当Generator函数遇到一个yield关键字**就将暂停执行。
+	*/
+
+	/*------------------Generator 函数的语法---------------------*/
+	/*
+	** function *foo() {    or     function* foo() {
+	**    // ..
+	** }
+	*/
+
+	//some demos
+	function *foo(){
+		yield 1;
+		yield 2;
+		yield 3;
+		yield 4;
+		yield 5;
+	}
+
+	var it = foo()
+	console.log(it,it.next(),it.next())
+	//result:
+	/*
+	** it --> foo
+	** it.next() --> { done:false,value:1 }
+	** it.next() --> { done:false,value:2 }
+	** so,generator中的yield能将其后的值传出函数外面
+	*/
+
+	function* genFunc() {
+	    // (A)
+	    console.log('First');
+	    yield;
+	    console.log('Second');
+   }
+    const genObj = genFunc();
+    genObj.next();
+    // Output: First
+    genObj.next();
+    // output: Secon
+
+    /*
+      1. 当您调用生成器函数genFunc()时，您将获得可用于控制进程的生成器对象genObj
+   		 此时该生成器对象里面的代码还没有执行,该进程最初在行A中暂停。
+	  2. genObj.next()恢复执行，
+	  3. genFunc()中的yield将暂停执行
+	 */
+
+	 //对象中的generator方法
+	 const obj = {
+	     * generatorMethod() {
+	         ···
+	     }
+	 };
+	 const genObj = obj.generatorMethod();
+
+
+
+
+	 
+</script>
+</body>
+</html>
