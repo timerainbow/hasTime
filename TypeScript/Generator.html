@@ -25,7 +25,7 @@
 	*/
 
 	//some demos
-	function *foo(){
+	/*function *foo(){
 		yield 1;
 		yield 2;
 		yield 3;
@@ -34,7 +34,7 @@
 	}
 
 	var it = foo()
-	console.log(it,it.next(),it.next())
+	console.log(it,it.next(),it.next())*/
 	//result:
 	/*
 	** it --> foo
@@ -43,7 +43,7 @@
 	** so,generator中的yield能将其后的值传出函数外面
 	*/
 
-	function* genFunc() {
+	/*function* genFunc() {
 	    // (A)
 	    console.log('First');
 	    yield;
@@ -52,7 +52,7 @@
     const genObj = genFunc();
     genObj.next();
     // Output: First
-    genObj.next();
+    genObj.next();*/
     // output: Secon
 
     /*
@@ -63,17 +63,113 @@
 	 */
 
 	 //对象中的generator方法
-	 const obj = {
+	/* const obj = {
 	     * generatorMethod() {
 	         ···
 	     }
 	 };
-	 const genObj = obj.generatorMethod();
+	 const genObj = obj.generatorMethod();*/
 
 
 
 
-	 
+	/*function* helloGenerator() {
+	   //console.log("en.")
+       yield "hello";
+       yield "generator";
+       return;
+   }
+   var h = helloGenerator();
+   //console.log(h.next());//{ value: 'hello', done: false }
+   //console.log(h.next());//{ value: 'generator', done: false }
+   //console.log(h.next());//{ value: 'undefined', done: true }*/
+
+   /*------------------Generator 函数与迭代器(Iterator)-------------------------*/
+   //https://blog.csdn.net/tcy83/article/details/80427195
+
+   /*function* helloGenerator() {
+       yield "hello";
+       yield "generator";
+       return;
+   }
+   var h = helloGenerator();
+   for(var value of h){
+   	  console.log(value);//"hello","generator"
+   }*/
+
+
+   /*function* gen(x,y){
+   	  console.log("a");
+   	  let z= yield;
+   	  console.log("b");
+   	  let result = yield z*x;
+   	  console.log("c");
+   	  return result
+   }
+   var g = gen(5,6);
+   console.log(g.next());//{value: 11, done: false}
+   console.log(g.next());//{value: NaN, done: false}
+   console.log(g.next());*/
+   /*分析上面的代码：*/
+   /*
+   	1、第一执行next()，运行"yield x+y"，并返回x+y的运算结果11；
+	2、第二次执行next()，运行"yield z*x",此时是z为11，x为5，运算结果为55才对，为何是NaN呢？
+	前一次运行yield x+y的值并没有保存，let z=yield x+y，结果是let z=undefined，所以运算z*
+	x的结果是NaN。
+	那有没有办法解决这个问题，我们来改下这个例子：
+
+	function* gen(x,y){
+   	  let z= yield x+y;
+   	  let result = yield z*x;
+   	  return result
+   }
+   var g = gen(5,6);
+   console.log(g.next());//{value: 11, done: false}
+   console.log(g.next(11));//{value: 55, done: false}
+
+   我们第二次调用的时候，next方法中传入了参数11，此时得到正确的结果。next()方法是可以带参数的，其中的参数就替换了上一次yield执行的结果。在这个例子中yield x+y就替换成了11，即let z=yield x+y 替换成了let z=11，所以得到了正确的值。
+   */
+
+
+   /*------------------------------whole demo-----------------------------*/
+   /*
+   **-下面我们利用饭店肚包鸡的制作过程来说明，熊大去饭店吃饭，点了只肚包鸡，就美滋滋的玩着游戏
+   **-等着吃鸡。这时后厨就开始忙活了，后厨只有一名大厨，还有若干伙计，由于大厨很忙，无法兼顾整
+   **-个制作过程，需要伙计协助，于是根据肚包鸡的制作过程做了如下的分工。
+   **-
+   **-肚包鸡的过程：准备工作(宰鸡，洗鸡，刀工等)->炒鸡->炖鸡->上料->上桌
+   **-大厨很忙，负责核心的工序：炒鸡，上料
+   **-伙计负责没有技术含量，只有工作量的打杂工序：准备工作，炖鸡，上桌
+   */
+
+   //大厨的活
+   function* chef(){
+      console.log("fired chicken");//炒鸡
+      yield "worker";//交由伙计处理
+      console.log("sdd ingredients");//上料
+      yield "worker";//交由伙计处理
+   }
+   //伙计的活
+   function* worker(){
+       console.log("prepare chicken");//准备工作
+       yield "chef";//交由大厨处理
+       console.log("stewed chicken");
+       yield "chef";//交由大厨处理
+       console.log("serve chicken");//上菜
+   }
+   var ch = chef();
+   var wo = worker();
+   //流程控制
+   function run(gen){
+       var v = gen.next();
+       if(v.value =="chef"){
+          run(ch);
+       }else if(v.value =="worker"){
+       	  run(wo);
+       }
+   }
+   run(wo);//开始执行
+
 </script>
 </body>
 </html>
