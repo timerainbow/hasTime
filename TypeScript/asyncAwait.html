@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Async/Await</title>
+</head>
+<body>
+<script type="text/javascript">
+	/*---------------------Async----------------------*/
+	//让我们先从async关键字说起，它被放置在一个函数前面：
+	/****/ async function f() {
+	/****/     return 1
+	/****/ }
+	/*
+	** 函数前面的async一词意味着一个简单的事情：这个函数总是返回一个promise，如果代码中有return 
+	** <非promise>语句，JavaScript会自动把返回的这个value值包装成promise的resolved值。
+	*/
+	/****/ async function f() {
+	/****/     return 1
+	/****/ }
+	/****/ f().then(console.log) // 1
+	/*我们也可以显式的返回一个promise，这个将会是同样的结果：*/
+	/****/ async function f() {
+	/****/     return Promise.resolve(1)
+	/****/ }
+	/****/ f().then(console.log) // 1
+
+
+	/*---------------------Await----------------------*/
+	// 只能在async函数内部使用
+	/****/ let value = await promise
+	/*
+	**** 关键词await可以让JavaScript进行等待，直到一个promise执行并返回它的结果，
+	**** JavaScript才会继续往下执行。
+	*/
+	/****/ async function f() {
+	/****/     let promise = new Promise((resolve, reject) => {
+	/****/         setTimeout(() => resolve('done!'), 1000)
+	/****/     })
+	/****/     let result = await promise // 直到promise返回一个resolve值（*）
+	/****/     alert(result) // 'done!' 
+	/****/ }
+	/****/ f()
+</script>
+</body>
+</html>
