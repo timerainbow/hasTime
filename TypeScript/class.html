@@ -54,8 +54,18 @@
 	console.log(obj1.getName());//laotie
 	console.log(obj1.getAge());//88
 
-
-
+	/************************  Try Class  **************************/
+	console.log("/************************  Try Class  **************************/")
+	class IW{		
+		constructor(){
+			this.good = "stock" //变量的定义一定要定义在构造器里？
+		}
+		say(){
+			console.log(this.good)
+		}
+	}
+	var i = new IW();
+	i.say();
 </script>
 </body>
 </html>
