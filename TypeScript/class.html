@@ -5,7 +5,55 @@
 </head>
 <body>
 <script type="text/javascript">
-	
+
+	/************************  ES5 Javascript对象  **************************/
+	//函数名和实例化构造名相同且大写（非强制，但这么写有助于区分构造函数和普通函数）
+	function Person(name,age) {
+	    this.name = name;
+	    this.age=age;
+	}
+	Person.prototype.say = function(){
+	    return "我的名字叫" + this.name+"今年"+this.age+"岁了";
+	}
+	var obj=new Person("laotie",88);//通过构造函数创建对象，必须使用new 运算符
+	console.log(obj.say());			//我的名字叫laotie今年88岁了
+
+
+
+
+	/************************  ES6 Class  **************************/
+	class Person{				//定义了一个名字为Person的类
+	    constructor(name,age){  //constructor是一个构造方法，用来接收参数
+	        this.name = name;	//this代表的是实例对象
+	        this.age=age;
+	    }
+	    say(){					//这是一个类的方法，注意千万不要加上function
+	        return "我的名字叫" + this.name+"今年"+this.age+"岁了";
+	    }
+	}
+	var obj=new Person("laotie",88);
+	console.log(obj.say());		//我的名字叫laotie今年88岁了
+
+	//1.在类中声明方法的时候，千万不要给该方法加上function关键字
+	//2.方法之间不要用逗号分隔，否则会报错
+	//3.class不存在变量提升，所以需要先定义再使用
+
+	// ES6 中新增方法 Object.assign
+	// 可以通过Object.assign方法来为对象动态增加方法
+	Object.assign(Person.prototype,{
+	    getName:function(){
+	        return this.name;
+	    },
+	    getAge:function(){
+	        return this.age;
+	    }
+	})
+	var obj=new Person("laotie",88);
+	console.log(obj.getName());//laotie
+	console.log(obj.getAge());//88
+
+
+
 </script>
 </body>
 </html>
