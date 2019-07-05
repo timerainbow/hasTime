@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Promise</title>
+</head>
+<body>
+<script type="text/javascript">
+	/*----------------------------- 同步 -----------------------------*/
+	/*
+	** 同步模式，即上述所说的单线程模式，一次只能执行一个任务，函数调用后需等到函数执行结束，
+	** 返回执行的结果，才能进行下一个任务。如果这个任务执行的时间较长，就会导致「线程阻塞」。
+	*/
+
+	/* 例2.1 */
+	// var x = true;
+	// while(x);
+	// console.log("don't carry out");    //不会执行
+
+	/* 例2.3 */
+	/******************同步回调******************/
+	var fun1 = function(callback) {
+	    //do something
+	    console.log("before callback");
+	    (callback && typeof(callback) === 'function') && callback();
+	    console.log("after callback");
+	}
+	var fun2 = function(param) {
+	    //do something
+	    var start = new Date();
+	    while((new Date() - start) < 3000) { //delay 3s
+	    }
+	    console.log("I'm callback");
+	}
+	fun1(fun2);
+
+	// -------output--------
+	// before callback
+	// //after 3s
+	// I’m callback
+	// after callback
+
+	/****************** Promise ******************/
+	// Promise一旦新建就会「立即执行」，无法取消。
+	/* 例3.1 */
+	//构建Promise
+	var promise = new Promise(function (resolve, reject) {
+	    if (/* 异步操作成功 */) {
+	        resolve(data);
+	    } else {
+	        /* 异步操作失败 */
+	        reject(error);
+	    }
+	});
+
+	/* 接例3.1 */
+	/*
+	** promise.then(onFulfilled, onRejected);
+	** promise.then(function(data) {
+	**   // do something when success
+	** }, function(error) {
+	**   // do something when failure
+	** });
+	** then方法会返回一个Promise。它有两个参数，
+	** 分别为Promise从pending变为fulfilled和rejected时的回调函数（第二个参数非必选）。
+	** 这两个函数都接受Promise对象传出的值作为参数。
+	** function resolveFun(data) {
+	**     //data为promise传出的值
+	** }
+	*/
+
+
+
+	/*
+	** Promise新建后就会立即执行。而then方法中指定的回调函数，
+	** 将在当前脚本所有同步任务执行完才会执行。如下例：
+	*/
+	
+	/* 例3.2 */
+	// var promise = new Promise(function(resolve, reject) {
+	//   console.log('before resolved');
+	//   resolve();
+	//   console.log('after resolved');
+	// });
+
+	// promise.then(function() {
+	//   console.log('resolved');
+	// });
+
+	// console.log('outer');
+
+	// -------output-------
+	// before resolved
+	// after resolved
+	// outer
+	// resolved
+</script>
+</body>
+</html>
