@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>性能</title>
+</head>
+<body>
+<script type="text/javascript">
+　   
+    /*------------------------------- 1.全局变量 -------------------------------*/ 
+    //低效率的写法：
+	var globalVar = 1; 
+	function myCallback(info){ 
+	for( var i = 100000; i--;){ 
+		//每次访问 globalVar 都需要查找到作用域链最顶端，本例中需要访问 100000 次 
+		globalVar += i; 
+		}
+	} 
+	//更高效的写法：
+	// 全局变量 
+	var globalVar = 1; 
+	function myCallback(info){ 
+		//局部变量缓存全局变量 
+		var localVar = globalVar; 
+		for( var i = 100000; i--;){ 
+		//访问局部变量是最快的 
+		localVar += i; 
+	} 
+	//本例中只需要访问 2次全局变量
+	//在函数中只需要将 globalVar中内容的值赋给localVar 中区
+		globalVar = localVar; 
+	}
+	//此外，要减少作用域链查找还应该减少闭包的使用。
+
+
+
+	/*------------------------------- 2.循环 -------------------------------*/ 
+	/*for (var i = 0; i < data.length; i++) {
+	    //do someting
+	}*/
+	//每次循环开始前都需要判断i是否小于data.length，JavaScript并不会对data.length进行缓存，
+	//而是每次比较都会进行一次取值
+	/*for(var i = 0, m = data.length; i < m; i++) {
+	    //do someting
+	}*/
+
+
+
+
+
+
+
+	var globalVal = 0
+	function test(){
+		var val = 0;
+		console.time('console');
+		for(var i=0;i<10000;i++){
+			for(var j=0;j<10000;j++){
+				val += 1;
+				if(val >= 100000000) console.log(val);
+			}
+		}
+		console.timeEnd('console');
+	}
+	test()
+</script>
+</body>
+</html>
