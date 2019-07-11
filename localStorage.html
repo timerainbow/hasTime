@@ -6,7 +6,19 @@
 <body>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript">
-	
+	localStorage.setItem('myCat', 'Tom');
+	let cat = localStorage.getItem('myCat');
+	console.log(cat);
+
+
+	localStorage.removeItem('myCat');
+	let cat1 = localStorage.getItem('myCat');
+	console.log(cat1);
+
+
+	localStorage.clear();
+	let cat2 = localStorage.getItem('myCat');
+	console.log(cat2);
 </script>
 </body>
 </html>
