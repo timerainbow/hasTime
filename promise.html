@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		ul{
+			border:1px solid #fe7;
+			width:180px;
+			padding: 0;
+			margin: 0;
+			text-align: center;
+			margin-top:100px;
+			margin-left: 200px;		
+		}
+		li{
+			list-style: none;
+			height: 20px;
+			line-height: 20px;
+			background-color: #ccc;
+			margin: 10px;
+			cursor: pointer;
+			width: 160px;
+		}
+	</style>
+</head>
+<body>
+	<ul>
+		<li>1</li><li>2</li><li>3</li><li>4</li>
+	</ul>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript">
+	///////////////////////////////////////////////////////////////////////////////////////////////////
+	$('li').click(function(){
+		console.log($(this).index());
+	})
+	///////////////////////////////////////////////////////////////////////////////////////////////////
+	/*var a = function() {
+	    console.log('a');
+	};
+	var b = function() {
+	    console.log('b');
+	};
+	var c = function() {
+	    for(var i=0;i<100;i++){
+	        console.log('c')
+	    }  
+	};
+	a(b(c())); // 100个c -> b -> a*/
+
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////
+	const promise1 = new Promise((resolve, reject) => {
+	  setTimeout(() => {
+	    reject(new Error( '3秒之后promise1的状态由pending更新为rejected'));
+	  }, 3000);
+	});
+	const promise2 = new Promise((resolve, reject) => {
+	  setTimeout(() => {
+	    resolve(promise1);
+	    console.log('1秒之后执行promise2，此时promise1还未reject，promise1 reject后promise2才能resolve');
+	  }, 1000);
+	}).then(res => {
+	   console.log('resolved-1:', res);
+	}).catch(err => {
+	   console.log('rejected-1:', err);
+	});
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	new Promise((resolve, reject) => {
+	  const random = Math.random();
+	  if (random > 0.5) {
+	    resolve(random);
+	  } else {
+	      reject(new Error(random));
+	  }
+	}).then(res => {
+	    return (res * 10).toFixed(0);
+	}).then(res => {
+	    console.log('resolved-2:', res);
+	}).catch(err => {
+	    console.log('rejected-2:', err);
+	});
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
