@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>z-tree</title>
+	<!-- <link rel="stylesheet" type="text/css" href="css/demo.css"> -->
+	<link rel="stylesheet" type="text/css" href="css/zTreeStyle.css">
+	<script type="text/javascript" src="../jquery.js"></script>
+	<!-- <script type="text/javascript" src="jquery.ztree.core.js"></script> -->
+	<script type="text/javascript" src="jquery.ztree.all.js"></script>
+	<style type="text/css">
+		#treeRoot{
+			width: 400px;
+			height: 400px;
+			border:1px solid #eee;
+			margin: 40px auto;
+		}
+	</style>
+</head>
+<body>
+<div id="treeRoot" class="ztree"></div>
+<script type="text/javascript">
+   var zTreeObj;
+   var setting = {
+      callback:{
+         onClick: treeNodeClick
+      }
+   };
+   var zNodes = [
+   		{
+   			name:"test1", 
+   			open:true, 
+   			children:[
+      			{
+      				name:"test1_1"
+      			}, 
+      			{
+      				name:"test1_2"
+      			}
+      		]
+      	},
+   		{
+   			name:"test2", 
+   			open:true, 
+   			children:[
+      			{
+      				name:"test2_1"
+      			}, 
+      			{
+      				name:"test2_2"
+      			}
+      		]
+        }
+   ];
+
+   var addNodes = [
+         {
+               name:"新增的节点", 
+               open:true, 
+               children:[
+                  {
+                     name:"新增的节点sub"
+                  }, 
+                  {
+                     name:"新增的节点sub2"
+                  }
+               ]
+           }
+      ]
+
+   function treeNodeClick(event, treeId, treeNode){
+      //console.log(treeNode.tId + ", " + treeNode.name);
+      //var Nodes = zTreeObj.getSelectedNodes();
+      console.log(treeNode); 
+2
+      //根据Tid获取节点
+      //var nodeByTid = getNodeByTid(the_tid)
+
+      //在当前点击节点添加新的节点
+      zTreeObj.addNodes(treeNode,addNodes,true);
+   }
+
+   $(document).ready(function(){
+      zTreeObj = $.fn.zTree.init($("#treeRoot"), setting, zNodes);     
+   });
+</script>
+</body>
+</html>
