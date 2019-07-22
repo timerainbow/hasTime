@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<script type="text/javascript">
+	/***/// demo1
+	/***/function createJelly(){
+	/***/	return {
+	/***/		type: 'jelly',
+	/***/		colour: 'red',
+	/***/		scoops: 3
+	/***/	}
+	/***/}
+	/***/// demo2
+	/***/function createIceCream(flavour='Vanilla'){
+	/***/	return {
+	/***/		type: 'jelly',
+	/***/		scoops: 3,
+	/***/		flavour
+	/***/	}
+	/***/}
+	/***/// demo3
+	/***/function createDessert(){
+	/***/	return{
+	/***/		type: 'dessert',
+	/***/		bowl: [
+	/***/			createJelly(),
+	/***/			createIceCream()
+	/***/		]
+	/***/	}
+	/***/}
+	/***///x:console.log(createJelly());
+	/***///x:console.log(createIceCream());
+
+
+	/***/// ---------------------------------------------------------------
+	/***/function animal (name,sex) {
+    /***/    let obj = new Object()
+    /***/    obj.name = name
+    /***/    obj.sex = sex
+    /***/    obj.saySex = function () {
+    /***/        alert(`我的性别是${this.sex}`)
+    /***/    }
+    /***/    return obj
+    /***/}
+    /***///x:let monkey = animal('猴子','母')
+    /***//***///x:console.log(monkey.name)    //猴子
+    /***///x:monkey.saySex() 
+    /***/// 方便虽然方便，但是还是有缺点。就是每次新建的时候都需要在内部创建一个对象，然后进行一系列操作，最后返回。也就是说创建十次，那么就会创建十次全新的对象，然/***/后返回并赋值。这样创建的十个对象在代码间的关系是没有的，换句话说就是我们都产自动物，但是谁都不知道我们我们产自哪里。
+	/***/// --------------------- 
+	/***/// 改进型
+	/***/function animal (name,sex) {
+    /***/    this.name = name
+    /***/    this.sex = sex
+    /***/    this.saySex = function () {
+    /***/        alert(`我的性别是${this.sex}`)
+    /***/    }
+    /***/}
+    /***///x:let monkey = new animal('猴子','母')
+    /***///x:xconsole.log(monkey.name)    //猴子
+    /***///x:monkey.saySex()
+    /***///x:console.log(monkey instanceof animal)     //true
+	/***///x:console.log(monkey instanceof Object)     //true
+	/***/// --------------------- 
+
+
+	/*****/  /***********/
+	/********/	//ES6工厂函数  from: https://www.jianshu.com/p/9ce26a5044e6
+	/***********/  /*****/
+	/***/const userName = 'echo';
+	/***/const avatar = 'echo.png';
+	/***/const user = {
+	/***/	userName,
+	/***/	avatar,
+	/***/	setUserName(userName){
+	/***/		this.userName = userName;
+	/***/		return this
+	/***/	}
+	/***/};
+	/***///x:console.log(user.setUserName('Food').userName);
+	/***/ //我们把我们的user对象用createUser()工厂函数造出来：
+	/***///x:const createUser = ({ userName, avatar }) => ({ // ((((((((( descript
+	/***///x:  userName,
+	/***///x:  avatar,
+	/***///x:  setUserName (userName) {
+	/***///x:    this.userName = userName;
+	/***///x:    return this;
+	/***///x:  }
+	/***///x:});											//  ))))))))) descript
+	/***///x:console.log(createUser({ userName: 'echo', avatar: 'echo.png' }));
+	/***///
+	/***///{
+	/***///  "avatar": "echo.png",
+	/***///  "userName": "echo",
+	/***///  "setUserName": [Function setUserName]
+	/***///}
+	/***///descript: 当你想要返回一个对象字面量的时候，如果你使用了大括号，JavaScript会默认你想要创建一个函数体。像是{ broken: 
+	/***///descript: true}。如果你想要通过隐式返回来返回一个字面量对象，那你就需要在你的字面量对象外面包裹一层小括号来消除这种歧义
+	/***/const createUser = ({
+	/***/  userName = 'Anonymous',
+	/***/  avatar = 'anon.png'
+	/***/} = {}) => ({
+	/***/  userName,
+	/***/  avatar
+	/***/});
+	/***/console.log(
+	/***/  // { userName: "echo", avatar: 'anon.png' }
+	/***/  createUser({ userName: 'echo' }),
+	/***/  // { userName: "Anonymous", avatar: 'anon.png' }
+	/***/  createUser()
+	/***/);
+	/***///console.log('-----------','-----------','-----------');
+</script>
+</body>
+</html>

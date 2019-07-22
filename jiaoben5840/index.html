@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>jQuery鱼骨样式时间轴代码 - 站长素材</title>
+<link rel="stylesheet" href="css/fishBone.css" />
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/fishBone.js"></script>
+<script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js"></script>
+<script>
+    data = [{ 'sourceDate': '<b>工作</b> 12-1 12:20', 'colorLevel': '工作' },
+    { 'sourceDate': '<b>工作</b> 12-2 12:20', 'colorLevel': '工作' },
+    { 'sourceDate': '<b>工作</b> 12-3 12:20', 'colorLevel': '在库' },
+    { 'sourceDate': '<b>工作</b> 12-4 12:20', 'colorLevel': '在库' },
+    { 'sourceDate': '<b>工作</b> 12-5 12:20', 'colorLevel': '运输' },
+    { 'sourceDate': '<b>工作</b> 12-6 12:20', 'colorLevel': '运输' },
+    { 'sourceDate': '<b>工作</b> 12-7 12:20', 'colorLevel': '转移' },
+    { 'sourceDate': '<b>工作</b> 12-8 12:20', 'colorLevel': '转移' },
+    { 'sourceDate': '<b>工作</b> 12-9 12:20', 'colorLevel': '工作' },
+    { 'sourceDate': '<b>工作</b> 12-10 16:10', 'colorLevel': '工作2' },
+    { 'sourceDate': '<b>工作</b> 12-11 16:10', 'colorLevel': '工作2' },
+    { 'sourceDate': '<b>工作</b> 12-12 16:10', 'colorLevel': '工作' },
+    { 'sourceDate': '<b>工作</b> 12-13 16:10', 'colorLevel': '工作' },
+	{ 'sourceDate': '<b>工作</b> 12-14 16:10', 'colorLevel': '工作' },
+	{ 'sourceDate': '<b>工作</b> 12-15 16:10', 'colorLevel': '工作' },
+	{ 'sourceDate': '<b>工作</b> 12-16 16:10', 'colorLevel': '工作' },
+	{ 'sourceDate': '<b>工作</b> 12-17 16:10', 'colorLevel': '工作' },
+	{ 'sourceDate': '<b>工作</b> 12-18 16:10', 'colorLevel': '工作' },
+	{ 'sourceDate': '<b>工作</b> 12-19 16:10', 'colorLevel': '工作' },
+    { 'sourceDate': '<b>工作</b> 12-20 16:10', 'colorLevel': '工作1' }];
+	$(function() {
+		//创建案件历史
+        $(".fishBoneDiv").fishBone(data);
+	});
+</script>
+
+</head>
+<body>
+
+<div class="container">
+  <div class="fishBoneDiv" />
+</div>
+</div>
+</body>
+</html>
