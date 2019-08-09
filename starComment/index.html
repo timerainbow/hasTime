@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>评价</title>
+	<script type="text/javascript" src="../jquery.js"></script>
+	<style type="text/css">
+		.commentList{
+			margin: 0;
+			padding: 0;
+		}
+		.commentList li{
+			float: left;
+			width: 40px;
+			height: 40px;
+			background-image: url(img/stardown.png);
+			background-size: cover;
+			list-style: none;
+			position: relative;
+		}
+		.commentList:after{
+			content: '';
+			display: table;
+			height: 0;
+			visibility: hidden;
+			clear: both;
+		}
+		.commentList .starUpper{
+			width: 100%;
+			height: 100%;
+			background-image: url(img/starup.png);
+			background-size: cover;
+			position: absolute;
+			left: 0;
+			top: 0;
+		}
+		.commentList .starCenter{
+			height: 100%;
+			background-color: #F8D96C;
+			overflow: hidden;
+			float: left;
+		}
+	</style>
+</head>
+<body>
+<div class="commentZone">
+	<ul class="commentList" id="comment1">
+		<li>
+			<div class="starCenter"></div>
+			<div class="starUpper"></div>
+		</li>
+		<li>
+			<div class="starCenter"></div>
+			<div class="starUpper"></div>
+		</li>
+		<li>
+			<div class="starCenter"></div>
+			<div class="starUpper"></div>
+		</li>
+	</ul>
+</div>
+<script type="text/javascript">
+	function setStarStore(id,number){
+		var $comment = $(id);
+		var li_list = $comment.find("li");
+		var fullStar = parseInt(number)
+		if(fullStar >= 1){
+			for(var i=0;i<fullStar;i++){
+				$comment.find("li").eq(i).find(".starCenter").css({
+					"width":"100%"
+				})
+			}
+		}
+		if(fullStar<li_list.length && number > fullStar){
+			$comment.find("li").eq(fullStar).find(".starCenter").css({
+					"width":(number-fullStar)*100+"%"
+				})
+		}
+	}
+	setStarStore("#comment1",2.8)
+</script>
+</body>
+</html>

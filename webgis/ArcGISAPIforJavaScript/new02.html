@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Test Map</title>
+    <link rel="stylesheet" href="http://localhost/arcgis3.24/esri/css/esri.css" />
+    <script src="http://localhost/arcgis3.24/init.js"></script>
+    <style>
+      html,
+      body,
+      #map {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <script>
+      require([
+        "esri/map", 
+        "esri/dijit/HomeButton",
+        "dojo/i18n!esri/nls/jsapi",
+        "dojo/domReady!"
+      ], function(
+        Map, HomeButton, esriBundle
+      ){
+        esriBundle.widgets.homeButton.home.title = "Full Extent";
+        var map = new Map("map", {
+          center: [-56.049, 38.485],
+          zoom: 3,
+          basemap: "streets"
+        });
+              
+        var home = new HomeButton({
+          map: map
+        }, "HomeButton");
+        home.startup();
+      });
+    </script>
+  </head>
+  
+<body>
+    <div id="map"></div>
+</body>
+</html>

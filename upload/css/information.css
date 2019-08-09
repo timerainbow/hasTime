@@ -1,0 +1,131 @@
+*{
+	box-sizing: border-box;
+}
+html,body{
+	font-family: "微软雅黑",Arial, Helvetica, sans-serif;
+}
+.containerContent{
+	width: 1280px;
+	margin: 0 auto;
+}
+.selectsOne .inlineBlock{
+	margin-right: 20px;
+	padding-right: 20px;
+}
+.inlineBlock {
+    display: inline-block;
+}
+input{
+	background-color: #ffffff;
+	border-radius: 8px;
+	border: solid 1px #dddddd;
+	padding: 0 10px;
+	outline: none;
+	width: 340px;
+    height: 30px;
+}
+.redStart {
+    color: red;
+}
+.btn{
+    background-color: #0099FF;
+    text-align: center;
+    line-height: 32px;
+    color: white;
+    cursor: pointer;
+    height: 32px;
+    border-radius: 8px;
+    margin-top: 10px;
+    padding: 0 10px!important;
+    display: inline-block;
+}
+.btn:hover{
+	opacity: 0.6;
+}
+#pictureFrame{
+	width: 800px;
+	height: 250px;
+	background-color: #eee;
+	margin: 0;
+	border: 1px solid #bbb;
+}
+#picturePreview{
+	width: auto;
+	height: 100%;
+	outline: none;
+	display: block;
+}
+#useFor {
+    width: 88%;
+    height: 160px;
+    padding: 10px;
+    resize: none;
+    background-color: #ffffff;
+    border-radius: 8px;
+    border: solid 1px #dddddd;
+    padding: 0 10px;
+    outline: none;
+    padding: 10px;
+}
+.v-top{
+	vertical-align: top;
+	display: inline-block;
+}
+.selectsOne .des,#submitApplyData{
+	margin: 0;
+}
+.selectsOne{
+	margin-bottom: 20px;
+}
+#submitApplyData{
+	display: inline-block;
+	vertical-align: bottom;
+	margin-bottom: 20px;
+}
+.note{
+	font-size: 12px;
+	color: #666;
+	line-height: 30px;
+}
+label{
+	display: inline-block;
+	text-align: right;
+	width: 10%;
+}
+#writer,#title{
+	width: 39%;
+}
+.last-btn{
+	float: right;
+	margin-right: 20px;
+}
+.fileUploadZone{
+	position: relative;
+	height: 40px;
+}
+#submitApplyData{
+	position: absolute;
+	z-index: 99;
+}
+#upload{
+	position: absolute;
+	border: none;
+	z-index: 10;
+	left: 4px;
+	top: 4px;
+	opacity: 0;
+	width: 0;
+}
+.showfilename{
+	background-color: #eee;
+	width: 400px;
+	height: 32px;
+	line-height: 32px;
+	margin-left: 100px;
+	padding: 0 10px;
+	font-size: 14px;
+	box-sizing: border-box;
+}
+.showImage{
+	height: 100%;
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>VUE子组件向父组件传递信息</title>
+	<script type="text/javascript" src="vue.js"></script>
+</head>
+<body>
+<div id="app">
+	hello,i'm parent!
+	<son @son="getSonMsg"></son>
+	<son2 @son2="getSonMsg"></son2>
+</div>
+
+<script type="text/javascript">
+	//全局注册
+	Vue.component('son',{
+		template:'<div><button @click="sendMsg">globalButton</button></div>',
+		methods: {
+			sendMsg(){
+				this.$emit('son', 'this message come from son!');
+			}
+		}
+	})
+
+	//局部注册
+	var localComponent = {
+		template: "<div><button @click='send'>localButton</button></div>",
+		methods: {
+			send(){
+				this.$emit('son2', 'this message come from son2!');
+			}
+		}
+	}
+
+	var vm = new Vue({
+		el: "#app",
+		methods: {
+			getSonMsg(data){
+				console.log(data);
+			}
+		},
+		components: {
+			son2: localComponent
+		}
+	})
+</script>
+</body>
+</html>
+
+

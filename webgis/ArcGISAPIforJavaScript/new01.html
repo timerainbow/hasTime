@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Test Map</title>
+    <link rel="stylesheet" href="http://localhost/arcgis3.24/esri/css/esri.css" />
+    <script src="http://localhost/arcgis3.24/init.js"></script>
+    <style>
+      html,
+      body,
+      #map {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <script>
+      require([
+          "esri/map",
+          "esri/layers/ArcGISTiledMapServiceLayer",
+          "dojo/domReady!"
+      ],function(Map, ArcGISTiledMapServiceLayer) {
+          var map = new Map("map");
+          //If you do not have Internet access then you will need to point this url to your own locally accessible tiled service.
+          var tiled = new ArcGISTiledMapServiceLayer("https://services.arcgisonline.com/arcgis/rest/services/Ocean/World_Ocean_Base/MapServer");
+          map.addLayer(tiled);
+      });
+    </script>
+  </head>
+  
+<body>
+    <div id="map"></div>
+</body>
+</html>
