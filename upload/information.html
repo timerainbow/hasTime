@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>新增资讯</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="css/information.css">
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<style type="text/css">
+		/* #picturePreview{
+			height: 200px;
+		} */
+	</style>
+</head>
+<body>
+	<div class="containerContent">
+		<div class="selectsOne">
+				<label for="writer"><span class="redStart">*</span>作者：</label>
+				<input type="text" id="writer" name="">
+
+				<label for="title"><span class="redStart">*</span>资讯标题：</label>
+				<input type="text" id="title" name="">
+		</div>
+
+		<div class="selectsOne">
+			<label class="v-top" for="applyName"><span class="redStart">*</span>资讯主题图片：</label>
+			<div class="inlineBlock">
+				<div class="fileUploadZone">
+					<div class="btn" id="submitApplyData">导入图片</div>
+					<input onchange="previewImage(this)" id="upload" type="file" name="file">
+					<div id="previewZone" class="showfilename inlineBlock">未选择文件</div>
+				</div>
+				<div id="pictureFrame"><img id="picturePreview"></div>			
+				<div class="note">备注：导入的图片需满足：1080*1920的规格，大小图片大小上限为10M，否则无法导入</div>
+			</div>		
+		</div>
+
+		<label class="v-top" for="useFor"><span class="redStart">*</span>资讯文本编辑：</label>
+		<textarea id="useFor"></textarea>
+		<div class="btn last-btn" id="preview">保存</div>
+		<div class="btn last-btn" id="save">预览</div>
+	</div>
+<script type="text/javascript">
+	$("#submitApplyData").on("click",function(){
+		$("#upload").click();
+	})
+
+	function previewImage(file){		
+		if(file && file.files){
+			var img = document.getElementById('picturePreview');
+			var reader = new FileReader();
+			reader.onload = function(evt){img.src = evt.target.result;}
+        	reader.readAsDataURL(file.files[0]);
+		}else{
+			//ie
+			file.select();
+			console.log(document.selection.createRange());
+			var path = document.selection.createRange().text;
+			document.getElementById("pictureFrame").innerHTML="";
+            document.getElementById("pictureFrame").style.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true',sizingMethod='scale',src=\"" + path + "\")";//使用滤镜效果
+		}    
+	}
+</script>
+</body>
+</html>

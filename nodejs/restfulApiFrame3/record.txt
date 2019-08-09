@@ -1,0 +1,31 @@
+step1:npm init -y
+
+step2:cnpm install babel-cli@6.5.1 babel-preset-es2015@6.5.0 --save
+
+step3:cnpm install express@4.13.4 --save
+
+step4:运行js文件
+1):配置package.json:
+	"scripts": {
+		"start": "babel-node index2.js"
+	}
+npm start
+
+2): 直接运行 babel-node index.js
+
+step5:cnpm install consign@0.1.2 --save
+
+step6:
+	1)安装sqlite3  https://www.sqlite.org/download.html
+	2)安装SQLiteStudio可视化工具
+
+step7:cnpm install sequelize@3.19.2 sqlite3 --save
+	(了解sequelize: http://sequelizejs.com)
+
+step8:cnpm install passport@0.3.2 passport-jwt@2.0.0 jwt-simple@0.4.1 --save
+
+
+
+
+
+

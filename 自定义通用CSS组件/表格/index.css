@@ -1,0 +1,59 @@
+/*边框的颜色   #eee*/
+*{
+	box-sizing: border-box;
+}
+.hannya-table{
+	padding: 0;
+	margin:0;
+	display: inline-block;
+	box-sizing: border-box;
+	border-collapse: collapse;
+	text-align: center;
+	font-size: 16px;
+	color: #666;	
+	border-radius: 8px;
+	border:1px solid #eee;
+}
+.hannya-table table{
+	border-collapse: collapse;
+}
+.hannya-table div{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	height: 36px;
+	line-height: 36px;
+}
+.hannya-table th{	
+	font-weight: normal;
+	background-color: #33B9FF;
+	color: white;
+	border:1px solid #eee;
+	border-top: none;
+}
+.hannya-table th:first-child,.hannya-table th:last-child{
+	border:none;
+	border-bottom: 1px solid #eee;
+}
+.hannya-table th:first-child{
+	border-top-left-radius: 8px;
+    background-color: #33B9FF;
+    border-left: none;
+}
+.hannya-table th:last-child{
+	border-top-right-radius: 8px;
+    background-color: #33B9FF;
+    border-right: none;
+}
+.hannya-table .hannya-table-th{
+	min-width: 100px;
+	height: 36px;
+	line-height: 36px;
+}
+.hannya-table td{
+	border:1px solid #eee;
+	border-bottom: none;
+}
+.hannya-table tr:last-child td:first-child,.hannya-table tr:last-child td:last-child{
+	border:none;
+}

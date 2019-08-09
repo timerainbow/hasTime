@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<script type="text/javascript">
+	function run1(){
+		setTimeout(function(){
+			console.log('run-1 timeout set!');
+		},2000)
+		console.log('run-1 code end!');
+	}
+
+	function run2(){
+		setTimeout(function(){
+			console.log('run-2 timeout set!');
+		},1000)
+	}
+	//run1();
+	//run2();
+
+	new Promise(function(resolve, reject){
+		setTimeout(function(){
+			console.log('Promise timeout set!');
+			//调用resolve函数才能进入then方法
+			resolve("done!");
+		},2000);
+	}).then(function(e){
+		console.log('code end!');
+		//console.log(e);
+	})
+</script>
+</body>
+</html>

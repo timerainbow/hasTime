@@ -1,0 +1,364 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ include file="/top/component/common/TaglibsDcp.jsp" %>
+<html>
+<head>
+<meta charset="utf-8">
+<title>用户评价</title>
+<link rel="stylesheet" type="text/css" href="${dcpStaticPath }/css/comments.css">
+<script type="text/javascript" src="${dcpStaticPath }/js/jquery.min.js"></script>
+<script type="text/javascript" src="${dcpStaticPath }/js/star.js"></script>
+<script type="text/javascript" src="${dcpStaticPath }/js/layui/layui.js"></script>
+<script type="text/javascript" src="${dcpStaticPath }/js/jQuery.Form.js"></script>
+<style>
+	#upload{
+		border:none;
+		display:block;
+		margin:0 auto;
+	}
+	#excelfile{
+		/* width:180px;
+		width:auto\9\0; */
+	}
+	#file-input{
+		width:90px;
+		height:28px;
+		position:absolute;
+		left:52px;
+		top:340px;
+		background-color:transparent;
+		/* visibility:hidden; */
+		overflow:hidden;
+	}
+	.fileInput{
+		position:absolute;
+		left:0;
+		top:0;
+		width:100%;
+		z-index:999;
+		opacity:0;
+	}
+	#fileList{
+		padding:4px 0;
+	}
+	.layui-layer-dialog .layui-layer-content{
+		color:white;
+	}
+	body{
+		background-color:white;
+	}
+</style>
+</head>
+<body>
+<div class="containerContent">
+		<div class="line">
+			<div class="subTitle inline-item" id="busi_id">${id}</div>	
+			<div class="inline-item commentScore" id ="tol"></div>
+			<div class="inline-item" style="vertical-align: text-bottom;">
+				<ul class="commentList" id="comment1">
+					<li>
+						<div class="starCenter"></div>
+						<div class="starUpper"></div>
+					</li>
+					<li>
+						<div class="starCenter"></div>
+						<div class="starUpper"></div>
+					</li>
+					<li>
+						<div class="starCenter"></div>
+						<div class="starUpper"></div>
+					</li>
+					<li>
+						<div class="starCenter"></div>
+						<div class="starUpper"></div>
+					</li>
+					<li>
+						<div class="starCenter"></div>
+						<div class="starUpper"></div>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="data-comment" id="pjDiv">
+			<div class="comment-title">应用评价</div>
+			<ul>
+				<li class="out-li">
+					<span class="comment-des">应用美观性：</span>
+					<div class="inline-item comment-item">
+						<ul id = "data-integrity" class="rating">
+					       <li class="rating-item" title="很不好"></li>
+					       <li class="rating-item" title="不好"></li>
+					       <li class="rating-item" title="一般"></li>
+					       <li class="rating-item" title="好"></li>
+					       <li class="rating-item" title="很好"></li>
+					   </ul>
+					</div>
+				</li>
+				<li class="out-li">
+					<span class="comment-des">应用易用性：</span>
+					<div class="inline-item comment-item">
+						<ul id = "data-veracity" class="rating">
+					       <li class="rating-item" title="很不好"></li>
+					       <li class="rating-item" title="不好"></li>
+					       <li class="rating-item" title="一般"></li>
+					       <li class="rating-item" title="好"></li>
+					       <li class="rating-item" title="很好"></li>
+					   </ul>
+					</div>
+				</li>
+				<li class="out-li">
+					<span class="comment-des">应用实用性：</span>
+					<div class="inline-item comment-item">
+						<ul id = "data-timeliness" class="rating">
+					       <li class="rating-item" title="很不好"></li>
+					       <li class="rating-item" title="不好"></li>
+					       <li class="rating-item" title="一般"></li>
+					       <li class="rating-item" title="好"></li>
+					       <li class="rating-item" title="很好"></li>
+					   </ul>
+					</div>
+				</li>
+				<li class="out-li">
+					<span class="comment-des">应用稳定性：</span>
+					<div class="inline-item comment-item">
+						<ul id = "serve-stablity" class="rating">
+					       <li class="rating-item" title="很不好"></li>
+					       <li class="rating-item" title="不好"></li>
+					       <li class="rating-item" title="一般"></li>
+					       <li class="rating-item" title="好"></li>
+					       <li class="rating-item" title="很好"></li>
+					   </ul>
+					</div>
+				</li> 
+			</ul>
+		</div>	
+
+		<div class="comment-descript">
+			<div class="title">评价内容：</div>
+			<textarea id="pjMsg"></textarea>
+		</div>
+
+		<div class="submit-zone">
+		   <!-- 多次单独选择 -->
+		   <form id="upload-form" method="post"  action="/import" enctype="multipart/form-data">
+		    	<div class="btn" id="uploadFile">附件上传</div>		    	
+		    	<div id="file-input">
+		    		<input class="fileInput fileInput-1" index="1" type="file" name="excelfile" id="" value="excelfile" onchange="getFileName(this)" />
+		    		<input class="fileInput fileInput-2" index="2" type="file" name="excelfile" id="" value="excelfile" onchange="getFileName(this)" />
+		    		<input class="fileInput fileInput-3" index="3" type="file" name="excelfile" id="" value="excelfile" onchange="getFileName(this)" />
+		    		<input class="fileInput fileInput-4" index="4" type="file" name="excelfile" id="" value="excelfile" onchange="getFileName(this)" />
+		    		<input class="fileInput fileInput-5" index="5" type="file" name="excelfile" id="" value="excelfile" onchange="getFileName(this)" />
+		    	</div>
+		    	<div class="fileNameText" id="fileList"></div>
+		    	<input class="btn" type="button"  id="upload" value="提交评价"/>
+		    	<input type="hidden"  id="fileNum" value="0"/>
+		   </form>
+		   <div style="margin: 4px 0;font-size: 12px;">备注：仅限5份附件（每份附件大小仅限于10M以内）</div>
+		</div> 
+	</div>
+
+<script type="text/javascript">
+	var uploadFileNameList = [];
+	var fileIndex = 999;
+	function getFileName(_this){
+	    var fileUrl = $(_this).val();
+	    var fileName = fileUrl.split('\\')[(fileUrl.split('\\')).length-1];
+	    uploadFileNameList.push(fileName);
+	    var html = "";
+	    var removeId = '';
+	    for (var i =  0; i < uploadFileNameList.length; i++) {
+	    	removeId = $(this).attr('index');
+	    	if(i < uploadFileNameList.length-1){
+	    		html += "<span class='fileNameLines'><i rid='"+removeId+"' onclick='removeSelectedImage(this)'></i>"+uploadFileNameList[i]+"、"+"</span>"
+	    	}else{
+	    		html += "<span class='fileNameLines'><i rid='"+removeId+"' onclick='removeSelectedImage(this)'></i>"+uploadFileNameList[i]+"</span>"
+	    		
+	    	}    
+	    }
+	    $(".fileNameText").empty();
+	    $(".fileNameText").append(html);
+	};
+	
+	function removeSelectedImage(_this){
+		var index = $(_this).parent().index();
+		$(_this).parent().remove();
+		uploadFileNameList.splice(index,1);
+	};
+	
+	$(".fileInput").on("change",function(){
+		var thisIndex = $(this).attr("index");
+		fileIndex -= 1;		
+		$(".fileInput").removeAttr("id");
+		$(this).attr("id","excelfile");	
+		$(".fileInput-"+thisIndex).css("z-index",fileIndex);
+	});
+	
+	function setStarStore(id,number){
+		var $comment = $(id);
+		var li_list = $comment.find("li");
+		var fullStar = parseInt(number);
+		if(fullStar >= 1){
+			for(var i=0;i<fullStar;i++){
+				$comment.find("li").eq(i).find(".starCenter").css({
+					"width":"100%"
+				})
+			}
+		}
+		if(fullStar<li_list.length && number > fullStar){
+			$comment.find("li").eq(fullStar).find(".starCenter").css({
+					"width":(number-fullStar)*100+"%"
+				})
+		}
+	}
+	
+	$(".fileInput").on("click",function(e){
+		if(uploadFileNameList.length == 5){
+			e.preventDefault();
+			layui.use('layer', function(){
+   				var layer = layui.layer;
+   				layer.msg('仅限5份附件！', {time: 1500});
+  			});
+			return;
+		}
+	});
+
+	$("#upload").click(function(){
+	    var totalIntegrity = getStarScore("data-integrity");
+		var totaVeracity = getStarScore("data-veracity");
+		var totalTimeliness = getStarScore("data-timeliness");
+		var totalStablity = getStarScore("serve-stablity");
+
+		var avg=(totalIntegrity+totaVeracity+totalTimeliness+totalStablity)/4;
+		$("#tol").text(avg+"分");
+		
+		setStarStore("#comment1",avg);
+		var catgory ="应用";
+		var excelfile=$("#excelfile").val();
+		var pjMsg=$("#pjMsg").val();
+		var fileList=$("#fileList").text();
+		var busiId=$("#busi_id").text();
+		if(excelfile!=null){
+			$("#upload-form").ajaxSubmit({
+				url:webPath + '/topEvaluationManagement/importPhoto',
+				type:'post',
+				async: false,
+				contentType:false,
+				data:$("#upload-form").serialize(),
+				dataType: "json",
+				success: function(data){
+                 $("#fileNum").val(data.excelfile);
+		        	if("上传成功！"==data.msg || "无上传文件！"==data.msg ){
+				     	$.ajax({
+				     		url: webPath + '/topEvaluationManagement/inserintoEvaluation',
+				    		data: {
+				    			pjMsg:pjMsg,
+				    			fileList:fileList,
+				    			totalIntegrity:totalIntegrity,
+				    			totaVeracity:totaVeracity,
+				    			totalTimeliness:totalTimeliness,
+				    			totalStablity:totalStablity,
+				    			avg:avg
+				    			,busiId:busiId,
+				    			catgory:catgory
+				    		},
+				    		dataType: 'json',
+				    		type: 'POST',
+				    		success: function(data) {		    			
+				    			layui.use('layer', function(){
+									var $ = layui.jquery, layer = layui.layer;
+				    				parent.layer.msg(data.msg, { time: 1500});	
+									setTimeout(function(){
+										top.location.reload();	//父页面刷新
+									},1500)
+								})
+				    		}
+				    	});     		
+		        	}else{
+		        		parent.layer.msg(data.msg, { time: 3000});
+		        	}
+				},
+				error: function(err){
+					//console.log(err)
+				}
+			});
+			
+		}else{
+			$.ajax({
+	     		url: webPath + '/topEvaluationManagement/inserintoEvaluation',
+	    		data: {
+	    			pjMsg:pjMsg,
+	    			fileList:fileList,
+	    			totalIntegrity:totalIntegrity,
+	    			totaVeracity:totaVeracity,
+	    			totalTimeliness:totalTimeliness,
+	    			totalStablity:totalStablity,
+	    			avg:avg,busiId:busiId,catgory:catgory
+	    		},
+	    		dataType: 'json',
+	    		type: 'POST',
+	    		success: function(data) {		    			
+	    			layui.use('layer', function(){
+						var $ = layui.jquery, layer = layui.layer;
+	    				parent.layer.msg(data.msg, { time: 1500});	
+						setTimeout(function(){
+							top.location.reload();	//父页面刷新
+						},1500)
+					})
+	    		}
+	    	});     
+			
+			
+		}
+
+	})
+	
+	$("#uploadFile").click(function(){
+		$("#uploadInput").trigger('click');
+	})
+	
+	//当没有进行点击从而对选级进行确定而移除鼠标时，清空选择
+	$(".comment-item").on("mouseleave",function(){
+		//console.log($(this).find(".rating").attr("isSure"))
+		if(!$(this).find(".rating").attr("isSure")){
+			var lis = $(this).find("li");
+			for(var i=0;i<lis.length;i++){
+				lis.eq(i).css("background-position","0px 0px");
+			}
+		}
+	})
+	
+	function initializeStar(starList){
+		for(var i=0;i<starList.length;i++){
+			$(starList[i]).star({
+			     mode:'LightHalf', //整颗星
+			     num:0,
+			});
+			//点击后禁止修改评价
+			$("#pjDiv").find(starList[i]).on("click",function(){
+				$(this).attr("isSure",true);
+				$(this).off();
+			});			
+		}
+	}
+	initializeStar(["#data-integrity","#data-veracity","#data-timeliness","#serve-stablity","#serve-usablity"]);
+	
+	function getStarScore(id){
+		var score = 0;
+		var el = $("#"+id);
+		var items = el.find(".rating-item");
+		var style = '';
+		
+		for(var i=0;i<items.length;i++){
+			style = items.eq(i).css("background-position").split(" ")[0];
+			if(style == "-24px"){
+				score += 1
+			}
+			if(style == "-48px"){
+				score += 0.5
+			}
+		}
+		return score;
+	}
+</script>
+</body>
+</html>

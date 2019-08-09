@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<script type="text/javascript">
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	async function timeout() {
+	    return 'hello world'
+	}
+	timeout();
+	console.log('虽然在后面，但是我先执行');
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	async function timeout() {
+	    return 'hello world'
+	}
+	console.log(timeout());
+	console.log('虽然在后面，但是我先执行');
+	//原来async 函数返回的是一个promise 对象，如果要获取到promise 返回值，我们应该用then 方法
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	async function timeout() {
+	    return 'hello world'
+	}
+	timeout().then(result => {
+	    console.log(result);
+	})
+	console.log('虽然在后面，但是我先执行');
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	async function timeout(flag) {
+	    if (flag) {
+	        return 'hello world'
+	    } else {
+	        throw 'my god, failure'
+	    }
+	}
+	console.log(timeout(true))  // 调用Promise.resolve() 返回promise 对象。
+	console.log(timeout(false)); // 调用Promise.reject() 返回promise 对象。
+	//如果async 函数中有返回一个值,当调用该函数时，内部会调用Promise.solve()方法把它转化成一个promise对象作为返回
+	//但如果timeout 函数内部抛出错误呢？ 那么就会调用Promise.reject() 返回一个promise对象
+
+	timeout(false).catch(err => {
+	    console.log(err)
+	})
+	//如果函数内部抛出错误， promise 对象有一个catch 方法进行捕获。
+	////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	// 2s 之后返回双倍的值
+	function doubleAfter2seconds(num) {
+	    return new Promise((resolve, reject) => {
+	        setTimeout(() => {
+	            resolve(2 * num)
+	        }, 2000);
+	    } )
+	}
+
+	async function testResult() {
+	    let result = await doubleAfter2seconds(30);
+	    console.log(result);
+	}
+	testResult();
+	////////////////////////////////////////////////////////////////////////////////////////////////
+</script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		img{
+			width: 200px;
+		}
+		/*<!-- demo1 -->   grayscale*/
+		img.desaturate {
+		    filter: grayscale(100%);
+		    -webkit-filter: grayscale(100%);
+		    -moz-filter: grayscale(100%);
+		    -ms-filter: grayscale(100%);
+		    -o-filter: grayscale(100%);
+		}
+
+		/* demo2  :not*/
+		.nav li{
+			display: inline-block;
+		}
+		/*以往的做法是：*/
+		/*.nav li {
+		  border-right: 1px solid #666;
+		  display: inline-block;
+		}
+		.nav li:last-child {
+		  border-right: none;
+		}*/
+		/*现在只需：*/
+		.nav li:not(:last-child) {
+		  border-right: 1px solid #666;
+		}
+
+		/*demo3  页面顶部阴影*/
+		body:before {
+          content: "";
+          position: fixed;
+          top: -10px;
+          left: 0;
+          width: 100%;
+          height: 10px;
+          -webkit-box-shadow: 0px 0px 10px rgba(0,0,0,.8);
+          -moz-box-shadow: 0px 0px 10px rgba(0,0,0,.8);
+          box-shadow: 0px 0px 10px rgba(0,0,0,.8);
+          z-index: 100;
+		}
+
+		/*demo4  [attribute~=value]*/
+		/*1.title属性中包flower字符即可，不必为独立单词*/
+		[title *= flower]{
+			border:5px solid green;
+	     }
+		/*2.title属性中包含有flower的独立单词*/
+		[title ~= flower]{
+			border:5px solid yellow;
+	     }
+		/*3.title属性中只包含flower*/
+		[title = flower]{
+			border:5px solid red;
+	     }
+		/*4.属性开头选择器*/
+		/*
+		1.[attr^=val] :
+			This selector will select all elements with the attribute attr for which the value starts with val.
+		2.[attr$=val] :
+			This selector will select all elements with the attribute attr for which the value ends with val.
+		3.[attr*=val] :
+			This selector will select all elements with the attribute attr for which the value contains the substring val. (A substring is simply part of a string, e.g. “cat” is a substring in the string “caterpillar”.)
+		4.[attr|=val]：
+			与第一种类似，选择所有属性值以val或val-（没看错，这里有个破折号）开始的元素。主要用于匹配lang="en"或lang="en-US"之类的属性，不常用。*/
+		[lang|=en]{ 
+			color:red;  
+		}
+
+		/*demo5*/
+		.demo5-parent > span{
+			color: red;
+			font-size: 40px;
+		}
+
+		/*demo6*/
+		/* + 选择紧接在另一个元素后的元素，而且二者有相同的父元素。只会选择第一个相邻的匹配元素。*/
+		#demo6 span+a{
+			color: green;
+			font-size: 20px;
+		}
+		/* a~b，匹配所有在a元素之后的同级b元素。*/
+	</style>
+</head>
+<body>
+	<!-- 让你的彩色照片显示为黑白照片  -->
+	<div id="demo1">
+		<img class="desaturate" src="lighthouse.jpg">
+	</div>
+
+	<!-- 使用 :not() 在菜单上应用/取消应用边框,本人平常很少使用的伪类 -->
+	<div id="demo2" class="nav">
+		<ul><li>1</li><li>2</li><li>3</li><li>4</li></ul>
+	</div>
+
+	<div id="demo4">
+    	<img src="lighthouse.jpg" title="flower" />
+		<img src="lighthouse.jpg" title="tulip flower" />
+		<img src="lighthouse.jpg" title="lupu bridgeflower" />
+		   
+        <p lang="en">Hello!</p>
+		<p lang="en-glish">Hello!</p>
+		<p lang="e-us">Hi!</p>
+	</div>
+
+	<!-- 直接后代选择器 > -->
+	<div id="demo5">
+		<div class="demo5-parent">
+			<span>1</span>
+			<div>
+				<span>2</span>
+			</div>
+			<span>1</span>
+		</div>
+	</div>
+
+	<!-- 相邻选择器 + -->
+	<div id="demo6">
+		<span>111</span><a href="javascript:void(0)">href</a><li><a href="javascript:void(0)">href</a></li>
+	</div>
+</body>
+</html>
