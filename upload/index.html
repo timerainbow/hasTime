@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		iframe{
+			width: 100%;
+			height: 800px;
+			outline: none;
+			border:none;
+		}
+	</style>
+	<script type="text/javascript" src="../jquery.js"></script>
+</head>
+<body>
+<button onclick="change('information')">a</button><button onclick="change('b')">b</button>
+<iframe src="b.html"></iframe>
+<script type="text/javascript">
+	function change(text) {
+		$('iframe').attr('src',text+'.html')
+	}
+</script>
+</body>
+</html>
