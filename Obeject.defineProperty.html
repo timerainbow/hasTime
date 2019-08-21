@@ -1,0 +1,40 @@
+<html>
+<head>
+    <title>defineProperty</title>
+</head>
+<body>
+    <div id="watchValue">...</div>
+    <script>
+        var a = {};
+        Object.defineProperty(a,"b",{
+            set:function(newValue){
+                console.log("you will set the value:"+newValue);
+            },
+            get:function(){
+                console.log("you get this value");
+                return 2;   
+            }
+        })
+
+        a.b = 1;  //set
+        console.log(a.b);      //get
+
+
+        //监听某个变量，当变量发生变化的时候，我们就更新对应的视图
+        var data = {};
+        var dyna = document.getElementById("watchValue");
+        Object.defineProperty(data,"b",{
+            set:function(newValue){            
+                dyna.textContent = newValue;
+            },
+            get:function(){  
+            }
+        })
+
+        var  i =0;
+        setInterval(function(){
+            data.b = i++;
+        },1000)
+    </script>
+</body>
+</html>
