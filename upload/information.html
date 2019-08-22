@@ -53,7 +53,12 @@
 		}else{
 			//ie
 			file.select();
-			console.log(document.selection.createRange());
+
+			//让焦点处于别控件上，必须加上这句，
+			//否则ie9报拒绝访问的错误
+			//目的是让其它元素获得焦点
+			//document.getElementById("someDiv").focus();
+
 			var path = document.selection.createRange().text;
 			document.getElementById("pictureFrame").innerHTML="";
             document.getElementById("pictureFrame").style.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true',sizingMethod='scale',src=\"" + path + "\")";//使用滤镜效果

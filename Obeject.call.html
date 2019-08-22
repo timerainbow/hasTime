@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Call</title>
+</head>
+<body>
+<script type="text/javascript">
+	var name = "小王",age = 17;
+	var obj = {
+		name: "小张",
+		objAge: this.age,
+		myFun: function(){
+			console.log(this.name+" 年龄:"+this.age)
+		}
+	}
+	console.log(obj.objAge) //17                      this指向window对象
+	obj.myFun() //小张 年龄:undifined                 this指向obj
+	
+	
+	//下面使用call方法改变this的指向
+	//此时obj的this已经指向obj2
+	var obj2 = {
+		name:"小梁",
+		age:10000
+	}
+	console.log("-------------------------------------------")
+	obj.myFun.call(obj2) //小梁 年龄:10000
+</script>
+</body>
+</html>

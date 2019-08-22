@@ -20,6 +20,17 @@ window.frames["iframe_ID"].document.getElementById("元素id");
 方法调用
 父页面调用子页面方法：FrameName.window.childMethod();
 子页面调用父页面方法：parent.window.parentMethod();
+
+1. 父页面获取子页面元素：（jquery写法）
+    格式：$("#iframe的ID").contents().find("#iframe中的控件ID").click(); 
+    实例：$("#ifm").contents().find("#iBtnOk").click(); // ifm 为 <iframe> 标签 id; iBtnOk 为子页面按钮 id
+
+2. 父页面调用子页面方法：
+    格式：$("#iframe的ID")[0].contentWindow.iframe方法(); 
+    实例：$("#ifm")[0].contentWindow().iClick(); // ifm 为 <iframe> 标签 id; iClick为子页面 js 方法
+
+在应用有frameset或者iframe的页面时，window.parent是父窗口，window.top是最顶级父窗口（有的窗口中套了好几层frameset或者iframe），window.self是当前窗口，window.opener是用open方法打开当前窗口的那个窗口。
+
  
 DOM元素访问
 获取到页面的window.document对象后，即可访问DOM元素

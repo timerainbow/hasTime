@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>vuex</title>
+	<script type="text/javascript" src="../vue.js"></script>
+	<script type="text/javascript" src="vuex.js"></script>
+</head>
+<body>
+<div id="app">
+	<son1></son1>
+	<son2></son2>
+	<son3></son3>
+</div>
+<script type="text/javascript">
+	Vue.use(Vuex)
+
+	var component1 = {
+		template: `<div>
+					parent say to component1:{{ $store.state.say }}
+					<button @click="add">add</button>
+				  </div>`,
+		methods: {
+			add(){
+				store.commit('increment',2)
+			}
+		}
+	}
+
+	var component2 = {
+		template: `<div>
+					parent say to component1:{{ $store.state.say }}
+					<button @click="subtraction">divition</button>
+				  </div>`,
+		methods: {
+			/*subtraction(){
+				store.commit('subtraction')
+			}*/
+			...Vuex.mapMutations(['subtraction'])
+		}
+	}
+
+	var component3 = {
+		template: `<div>
+					parent say to component1:{{ $store.state.say }}
+					<button @click="asyncSubtraction">divition2</button>
+				  </div>`,
+		methods: {
+			asyncSubtraction(){
+				store.dispatch('incrementAsync')
+			}
+		}
+	}
+
+	const INCREMENT = "increment";
+
+	var store = new Vuex.Store({
+		state: {
+			say: 0
+		},
+		//更改 Vuex 的 store 中的状态的唯一方法是提交 mutation
+		//mutation必须是同步函数,action是异步函数，提交的是mutation
+		mutations: {
+			[INCREMENT] (state,n){
+				state.say += n
+			},
+			subtraction (state){
+				state.say--
+			}
+		},
+		//Action 提交的是 mutation，而不是直接变更状态。
+		//Action 可以包含任意异步操作。
+		actions: {
+			increment (context){
+				context.commit("INCREMENT")
+			},
+			//es6
+			/*increment ({commit}){
+				commit("INCREMENT")
+			},*/
+			//乍一眼看上去感觉多此一举，我们直接分发 mutation 岂不更方便
+			//我们可以在 action 内部执行异步操作
+			incrementAsync ({ commit }) {
+			    setTimeout(() => {
+			      commit('increment',4)
+			    }, 1000)
+			}
+		}
+	})
+
+	new Vue({
+		el: "#app",
+		components: {
+			son1: component1,
+			son2: component2,
+			son3: component3
+		},
+		data(){
+			return {
+				vuexData: ''
+			}
+		},
+		store: store
+	})
+</script>
+</body>
+</html>
+
+
+
+
+
