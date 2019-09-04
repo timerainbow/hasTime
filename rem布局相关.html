@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <title>rem布局相关</title>
+    </head>
+    <body>
+        <script>
+            //document.documentElement
+            //是一个会返回文档对象（document）的根元素的只读属性（如HTML文档的 <html> 元素）
+            /////Element.getBoundingClientRect()方法返回元素的大小及其相对于视口的位置。
+            var documentElement = document.documentElement;
+            function callback() {
+                var clientWidth = documentElement.clientWidth;
+                // 屏幕宽度大于780，不在放大
+                clientWidth = clientWidth < 780 ? clientWidth : 780;
+                documentElement.style.fontSize = clientWidth / 10 + 'px';
+            }
+
+            //orientationchange  //当手机水平/垂直方向改变时事件
+            document.addEventListener('DOMContentLoaded', callback);
+            window.addEventListener('orientationchange' in window ? 'orientationchange' : 'resize', callback);
+        </script>
+    </body>
+</html>
