@@ -1,8 +1,8 @@
 <template>
     <div class="wrapper">
-        <swiper :options="swiperOption">
+        <swiper :options="swiperOption" v-if="showSwiper">
             <swiper-slide v-for="item in list" :key="item.id">
-                <img class="swiper-img" src="item.imgUrl" />
+                <img class="swiper-img" :src="item.imgUrl" />
             </swiper-slide>
             <div class="swiper-pagination" slot="pagination"></div>
         </swiper>
@@ -22,6 +22,11 @@ export default {
         loop: true
       }
     }
+  },
+  computed: {
+    showSwiper () {
+      return this.list.length
+    }
   }
 }
 </script>
@@ -33,7 +38,7 @@ export default {
     overflow hidden
     height 0
     width 100%
-    padding-bottom 26.67%
+    padding-bottom 29.67%
     background #ccc
     .swiper-img
       width 100%

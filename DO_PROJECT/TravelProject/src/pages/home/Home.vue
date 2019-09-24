@@ -2,9 +2,9 @@
     <div>
         <home-header :city='city' />
         <home-swiper :list='swiperList' />
-        <home-icons />
-        <home-recommend />
-        <home-weekend />
+        <home-icons :list='iconsList' />
+        <home-recommend :list='recommendList' />
+        <home-weekend :list='weekendList' />
     </div>
 </template>
 
@@ -30,7 +30,10 @@ export default {
   data () {
     return {
       city: '',
-      swiperList: []
+      swiperList: [],
+      iconsList: [],
+      recommendList: [],
+      weekendList: []
     }
   },
   methods: {
@@ -39,12 +42,13 @@ export default {
     },
     getHomeInfoSucc (res) {
       res = res.data
-      console.log(res)
       if (res.ret && res.data) {
         const data = res.data
         this.city = '北京'
         this.swiperList = data.swiperList
-        console.log(data.swiperList)
+        this.iconsList = data.iconList
+        this.recommendList = data.recommendList
+        this.weekendList = data.weekendList
       }
     }
   }
