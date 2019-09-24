@@ -23,8 +23,8 @@ router.post('/signup',async (ctx)=>{
 	} = ctx.request.body
 
 	if(code){
-		const saveCode = await Store.hget(`nodemail:$(username)`,'code')
-		const saveExpire = await Store.hget(`nodemail:$(username)`,'expire')
+		const saveCode = await Store.hget(`nodemail:${username}`,'code')
+		const saveExpire = await Store.hget(`nodemail:${username}`,'expire')
 		if(code === saveCode){
 			if(new Date().getTime() - saveExpire > 0){
 				ctx.body = {
@@ -114,7 +114,7 @@ router.post('/signin',async (ctx,next)=>{
 
 router.post('/verify',async (ctx,next)=>{
 	let username = ctx.request.body.username
-	const saveExpire = await Store.hget(`nodemail:$(username)`,'expire')
+	const saveExpire = await Store.hget(`nodemail:${username}`,'expire')
 	if(saveExpire&&new Date().getTime() - saveExpire <0){
 		ctx.body = {
 			code:-1,
@@ -141,13 +141,13 @@ router.post('/verify',async (ctx,next)=>{
 	}
 
 	let mailOptions = {
-		from:`"认证邮件"<${Email.smtp.user}>`,
+		from:`认证邮件:<${Email.smtp.user}>`,
 		to:ko.email,
 		subject:'《地球大战》',
 		html:`地球人类大战,验证码:${ko.code}`
 	}
 
-	awai transporter.sendMail(mailOptions,(err,info)=>{
+	await transporter.sendMail(mailOptions,(err,info)=>{
 		if(err){
 			return console.log('err')
 		}else{
