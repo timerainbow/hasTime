@@ -7,10 +7,12 @@
             <span class="iconfont">&#xe632;</span>
             输入城市/景点/游玩主题
         </div>
-        <div class="header-right">
-            {{this.city}}
-            <span class="iconfont arrow-icon">&#xe606;</span>
-        </div>
+        <router-link to="/city">
+          <div class="header-right">
+              {{this.city}}
+              <span class="iconfont arrow-icon">&#xe606;</span>
+          </div>
+        </router-link>
     </div>
 </template>
 
@@ -26,30 +28,31 @@ export default {
 <style lang="stylus" scoped>
   @import '~styles/varible.styl';
   .header
-    display:flex
-    line-height:.86rem
-    background:$bgColor
-    color:#fff
+    display flex
+    line-height $headerHeight
+    background $bgColor
+    color #fff
     .header-left
-      width:.63rem
-      float:left
+      width .63rem
+      float left
       .back-icon
-        text-align :center
-        font-size :.4rem
+        text-align center
+        font-size .4rem
     .header-input
-      flex:1
-      height:.64rem
-      line-height:.64rem
-      margin-top:.12rem
-      margin-left:.2rem
+      flex 1
+      height .64rem
+      line-height .64rem
+      margin-top .12rem
+      margin-left .2rem
       padding-left .2rem
-      background:#fff
-      border-radius:.1rem
-      color:#ccc
+      background #fff
+      border-radius .1rem
+      color #ccc
     .header-right
-      width:1.24rem
-      float:right
-      text-align :center
+      width 1.24rem
+      float right
+      color #fff
+      text-align center
       .arrow-icon
         margin-left -.04rem
         font-size .24rem
