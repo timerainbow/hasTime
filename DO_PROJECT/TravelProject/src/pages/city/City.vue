@@ -1,15 +1,58 @@
 <template>
   <div>
     <city-header />
+    <city-search />
+    <city-list
+      :cities="cities"
+      :hotCities="hotCities"
+      :letter="letter"
+    />
+    <city-alphabet
+      :cities="cities"
+      @change="handleLetterChanges"
+    />
   </div>
 </template>
 
 <script>
 import CityHeader from './components/Header'
+import CitySearch from './components/Search'
+import CityList from './components/List'
+import CityAlphabet from './components/Alphabet'
+import axios from 'axios'
 export default {
   name: 'City',
   components: {
-    CityHeader
+    CityHeader,
+    CitySearch,
+    CityList,
+    CityAlphabet
+  },
+  data () {
+    return {
+      hotCities: [],
+      cities: {},
+      letter: ''
+    }
+  },
+  mounted () {
+    this.getCityInfo()
+  },
+  methods: {
+    getCityInfo () {
+      axios.get('/api/city.json').then(this.handleGetCityInfoSucc)
+    },
+    handleGetCityInfoSucc (res) {
+      res = res.data
+      if (res.ret) {
+        const data = res.data
+        this.cities = data.cities
+        this.hotCities = data.hotCities
+      }
+    },
+    handleLetterChanges (letter) {
+      this.letter = letter
+    }
   }
 }
 </script>
