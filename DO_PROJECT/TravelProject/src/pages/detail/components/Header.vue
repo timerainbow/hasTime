@@ -32,9 +32,11 @@ export default {
       }
     }
   },
+  // 解决keep-awake数据缓存问题
   activated () {
     window.addEventListener('scroll', this.handleScroll)
   },
+  // 解决组件间的全局影响
   deactivated () {
     window.removeEventListener('scroll', this.handleScroll)
   },
