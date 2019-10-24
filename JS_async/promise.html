@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Promise</title>
+  </head>
+  <body>
+  	<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bluebird/3.5.5/bluebird.js"></script>
+    <script type="text/javascript">
+    	//需求：用promise解决多个ajax请求同步问题，后面的ajax请求需要用到
+    	//前面ajax请求得到的数据
+    	//亦即，多个ajax是按照顺序执行的，后面的请求必须等到前面请求完毕之后才能执行
+    	function asyncAjax(url){
+    		return promise = new Promise(function(resolve,reject){
+	    		setTimeout(function(){
+	    			$.ajax({
+		    			url: url,
+		    			success: function(res){
+		    				resolve(res)
+		    			},
+		    			error: function(err){
+		    				reject(err)
+		    			}
+		    		})
+	    		},Math.random()*2500)
+	    	})
+    	}
+    	
+    	asyncAjax('data.json')
+    	.then(function(r){
+    		console.log(r)
+    		return asyncAjax('data2.json')
+    	})
+    	.then(function(r){
+    		console.log(r)
+    		return asyncAjax('data.json')
+    	})
+    	.then(function(r){
+    		console.log(r)
+    	})
+    </script>
+  </body>
+</html>
