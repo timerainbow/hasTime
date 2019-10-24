@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Async Await</title>
+  </head>
+  <body>
+  	<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bluebird/3.5.5/bluebird.js"></script>
+    <script type="text/javascript">
+    	function pAjax(url) {
+            return new Promise(function(resolve,reject){
+                setTimeout(function(){
+                    $.ajax({
+                        url: url,
+                        success: function(res){
+                            resolve(res)
+                        },
+                        error: function(err){
+                            reject(err)
+                        }
+                    })
+                },Math.random()*2000)
+            })
+        }
+
+        //perfect
+        async function run(){
+            var r1 = await pAjax('data.json')
+            console.log(r1.data)
+            var r2 = await pAjax('data2.json')
+            console.log(r2.data)
+            var r3 = await pAjax('data.json')
+            console.log(r3.data)
+        }
+        run()
+    </script>
+  </body>
+</html>
