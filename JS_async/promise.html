@@ -28,15 +28,15 @@
     	
     	asyncAjax('data.json')
     	.then(function(r){
-    		console.log(r)
+    		console.log(r.data)
     		return asyncAjax('data2.json')
     	})
     	.then(function(r){
-    		console.log(r)
+    		console.log(r.data)
     		return asyncAjax('data.json')
     	})
     	.then(function(r){
-    		console.log(r)
+    		console.log(r.data)
     	})
     </script>
   </body>

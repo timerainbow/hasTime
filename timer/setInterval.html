@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<script type="text/javascript">
+	function Timer() {
+	  this.s1 = 0;
+	  this.s2 = 0;
+	  //箭头函数的this指向setInterval外部，此时this指向Timer自身的实例
+	  setInterval(() => this.s1++, 1000);
+
+	  //setInterval的回调函数是普通函数时，this指向的是window对象，此时
+	  //this.s2为undefined，this.s2++ 就为NAN
+	  setInterval(function () {
+	    this.s2++;//这时被没有改变Timer中的s2，因为this指向的是windowd对象
+	  }, 1000);
+	}
+
+	var timer = new Timer();
+	setTimeout(() => console.log('s1: ', timer.s1), 3100);
+	setTimeout(() => console.log('s2: ', timer.s2), 3100);
+</script>
+</body>
+</html>
