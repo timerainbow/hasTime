@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+  <ul>
+      <li>one</li>
+      <li>two</li>
+      <li>three</li>
+      <li>one</li>
+  </ul>
+<script type="text/javascript">
+	var lists = document.getElementsByTagName('li');
+	for(var i = 0 , len = lists.length ; i < len ; i++){
+	    lists[ i ].onclick = function(){
+	        alert(i);    
+	    };
+	}
+	//当鼠标移过每一个<li>元素时，总是弹出4，而不是我们期待的元素下标。这是为什么呢？
+	//是因为我绑定的回调函数只有在点击元素时才会调用，而此时 for 循环早已执行完毕，
+	//回调函数中并没有拿到循环中正确的变量 i，也就是说我遇到了循环和异步调用的经典问题
+	//同时这也是闭包的经典作用之一
+
+	/////解决办法是使用闭包来保存变量，这样即使 i一直在变，但闭包中使用 index 变量保存了
+	/////变量 i 的值，回调函数就可以拿到正确的下标了，所以，最终我把代码改成了如下形式
+	var lists = document.getElementsByTagName('li');
+	for(var i = 0 , len = lists.length ; i < len ; i++){
+	    (function(index){                           //a
+	        lists[ index ].onclick = function(){    //b
+	            alert(index);    
+	        };                    
+	    })(i);
+	}
+	//函数a中存在函数b对函数a的变量的引用，即为闭包,闭包中的变量常驻内存
+</script>
+</body>
+</html>

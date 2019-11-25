@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<script type="text/javascript">
+
+	//摘自: 一道经典的JavaScript面试题分析
+	//      https://www.jianshu.com/p/e833e554bcf5
+
+	/// 函数提升，函数提升优先级高于变量提升
+	/// 变量提升是指将变量申明提升到它所在的作用域的最开始部分。
+	// function Foo() {
+	//     getName = function () { alert (1); };
+	//     return this;
+	// }
+	// Foo.getName = function () { alert (2);};
+	// Foo.prototype.getName = function () { alert (3);};
+	// //一下用函数表达式与函数声明定义了名为getName的函数
+	// var getName = function () { alert (4);};
+	// function getName() { alert (5);}
+	//请写出以下输出结果：
+	// Foo.getName(); //2
+	// getName(); //4
+	// Foo().getName(); //1 //重点，将外层变量getName修改了，因此下面语句输出的是1 
+	// getName(); //5   ---------//1
+	// new Foo.getName();  // ---------//2  ok
+	// new Foo().getName(); // 3
+	// new new Foo().getName();  // -----------//3
+
+
+	//示例解释
+	var getName//变量被提升，此时为undefined
+	getName()//oaoafly 函数被提升 这里受函数声明的影响，虽然函数声明在最后可以被提升到最前面了
+	var getName = function() {
+	    console.log('wscat')
+	}//函数表达式此时才开始覆盖函数声明的定义
+	getName()//wscat
+	function getName() {
+	    console.log('oaoafly')
+	}
+	getName()//wscat 这里就执行了函数表达式的值
+
+
+
+	//test
+	function testGlobal(){
+		name = 'global？'//定义全局变量 name
+		console.log(name)
+	}
+	testGlobal()
+	console.log(name)
+</script>
+</body>
+</html>

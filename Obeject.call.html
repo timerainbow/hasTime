@@ -5,6 +5,8 @@
 </head>
 <body>
 <script type="text/javascript">
+	//functionObject.call(thisObj)
+	//functionObject 的this指向了 thisObj
 	var name = "小王",age = 17;
 	var obj = {
 		name: "小张",
@@ -25,6 +27,19 @@
 	}
 	console.log("-------------------------------------------")
 	obj.myFun.call(obj2) //小梁 年龄:10000
+
+	//带参
+	function foo(a,b){
+		document.writeln(this.name)
+		document.writeln(a)
+		document.writeln(b)
+	}
+	var obj = {
+		name: '李四',
+		age: 20
+	}
+	foo.call(obj,12,true)
+
 </script>
 </body>
 </html>

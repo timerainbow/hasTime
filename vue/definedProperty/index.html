@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<div id="app"></div>
+<script type="text/javascript">
+	// var obj = {}
+	// var name = 'maya'
+	// Object.defineProperty(obj,'name',{
+	// 	get: function(){
+	// 		console.log('get')
+	// 		return name
+	// 	},
+	// 	set: function(newValue){
+	// 		console.log('set value',newValue)
+	// 		name = newValue
+	// 	}
+	// })
+
+	// console.log(obj.name)
+	// obj.name = 'host'
+
+	var mv = {}
+	var data = {
+		price: 100,
+		name: 'maya'
+	}
+
+	var key,value
+	for (key in data) {
+		(function(key){
+			Object.defineProperty(mv, key, {
+				get: function () {
+					console.log('get')
+					return data[key]
+				},
+				set: function (newValue) {
+					console.log('set')
+					data[key] = newValue
+				}
+			})
+		})(key)
+	}
+
+</script>	
+</body>
+</html>
