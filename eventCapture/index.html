@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		#a{
+			background-color: #ccc;
+		}
+		#b{
+			background-color: #bbb;
+		}
+	</style>
+</head>
+<body>
+	<div id="a" class="a">
+		aaaaaaaaaaaaaaaa
+		<div id="b" class="b">
+			bbbbbbbbbbbbbb
+		</div>
+	</div>
+<script type="text/javascript">
+	///////////////////////////		222222
+	//默认为冒泡
+	/*document.getElementById('a').onclick = function(event){
+		console.log('aaaaaa')
+	}
+	document.getElementById('b').onclick = function(event){
+		event.stopPropagation()||(event.cancelBubble=true);//阻止冒泡事件行为
+		console.log('bbbbbb')
+	}*/
+
+
+	///////////////////////////		11111
+	//第三个参数在于选择的是事件冒泡false（自内向外）还是事件捕获true(自外向内)，默认为false
+	//addEventListener可以监听多个重复事件
+	/*document.querySelector('.a').addEventListener('click',function(){
+		console.log('a-a-a-a-a')
+	},true)
+
+	document.querySelector('.b').addEventListener('click',function(){
+		console.log('b-b-b-b-b')
+	},true)*/
+
+	
+	////////////////////////////////函数提升与变量提升
+	//函数提升优先于变量提升
+	//function a() //函数提升
+	//var a; //变量提升
+	//var b; //变量提升
+	var a = 0,b = 6;
+	console.log(a)
+
+	function a(){
+		console.log('function a')
+	}
+</script>
+</body>
+</html>
